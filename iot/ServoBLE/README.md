@@ -155,27 +155,11 @@ Ideas para impresión 3D:
 
 - Base IdeaBoard
 - Soporte ultrasónico frontal
-- Mini portón abatible
-- Caja electrónica
+- Mini portón 
 
-Posibles demos:
-
-- Garaje inteligente
-- Acceso MakerLab
-- Demo interactiva estudiantes
 
 ---
 
-## 🔧 Mejoras Futuras
-
-- App móvil
-- WiFi + nube
-- Cámara AI
-- Registro de accesos
-- Reconocimiento facial
-- Integración Sumobot
-
----
 
 ## 🎓 Uso Educativo
 
@@ -190,8 +174,3 @@ Proyecto utilizado para enseñar:
 Ideal para demostraciones del MakerLab.
 
 ---
-
-## 👨‍🔬 Autor
-
-MakerLab CENFOTEC  
-2026
