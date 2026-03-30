@@ -30,15 +30,6 @@ En el mundo de la programación usamos "librerías", paquetes de código que res
 | Varios | Cables Jumper | Macho-Macho. |
 | 1 | Cámara Web | Integrada en la PC o externa. |
 
-### Galería de Componentes
-
-**Protoboard y Arduino UNO**
-![Arduino y Protoboard](imagenes/Protoboard%20y%20Arduino%20UNO.jpeg)
-
-**LEDs y Resistencias**
-![LEDs y Resistencias](imagenes/Leds%20y%20resistencias.jpeg)
-
-
 ---
 
 ## 🔌 Conexiones de Hardware
@@ -59,6 +50,14 @@ Sigue estos pasos para armar tu circuito. Recuerda que siempre debes usar una re
 | Meñique | **Pin 12** |
 
 ---
+### Galería de Componentes
+
+**Protoboard y Arduino UNO**
+![Arduino y Protoboard](imagenes/Protoboard%20y%20Arduino%20UNO.jpeg)
+
+**LEDs y Resistencias**
+![LEDs y Resistencias](imagenes/Leds%20y%20resistencias.jpeg)
+
 
 ## 💻 Configuración del Software
 
