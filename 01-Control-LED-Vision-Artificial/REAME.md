@@ -33,7 +33,7 @@ En el mundo de la programación usamos "librerías", paquetes de código que res
 ### Galería de Componentes
 *(Inserta aquí las fotografías de tus componentes)*
 
-![Arduino y Protoboard](Protoboard y Arduino UNO.jpeg)
+![Arduino y Protoboard](imagenes/Protoboard y Arduino UNO.jpeg)
 ![Resistencias](./ruta/a/tu/foto_resistencias.jpg)
 ![LEDs](./ruta/a/tu/foto_leds.jpg)
 
