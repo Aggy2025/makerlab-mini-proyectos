@@ -1,12 +1,12 @@
 # 🖐️ Control de LEDs mediante Visión Artificial (Hand Tracking)
 
 > **MakerLab - Universidad Cenfotec**
-> Este proyecto es una ventana al futuro de las interfaces hombre-máquina, ideal para entender la integración entre el mundo físico (hardware) y la inteligencia artificial (software).
+> Este proyecto es ideal para entender la integración entre el mundo físico (hardware) y la inteligencia artificial (software).
 
 ![Video del Resultado Final](./ruta/a/tu/video_resultado.gif)
 *(Reemplaza esta ruta con el GIF o video de tu proyecto funcionando)*
 
-Este sistema permite controlar 5 LEDs físicos conectados a un Arduino utilizando gestos con la mano capturados a través de una cámara web. Al levantar diferentes dedos frente a la cámara, el sistema enciende o apaga los LEDs correspondientes en tiempo real. 
+Este sistema permite controlar 5 LEDs físicos conectados a un Arduino utilizando gestos con la mano capturados a través de la cámara de una PC. Al levantar diferentes dedos frente a la cámara, el sistema enciende o apaga los LEDs correspondientes en tiempo real. 
 
 ---
 
@@ -43,12 +43,12 @@ En el mundo de la programación usamos "librerías", paquetes de código que res
 
 ## 🔌 Conexiones de Hardware
 
-Sigue estos pasos para armar tu circuito. Recuerda que la pata larga del LED es el positivo (ánodo) y siempre debe ir acompañada de una resistencia para no quemarlo.
+Sigue estos pasos para armar tu circuito. Recuerda que siempre debes usar una resistencia en serie con cada LED para limitar la corriente y no quemarlo.
 
 1. Conecta el pin **GND** del Arduino a la línea negativa de la protoboard.
-2. Coloca los 5 LEDs en la protoboard. Conecta el **cátodo** (pata corta) de cada LED a la línea negativa.
-3. Conecta una resistencia de **220 ohmios** al **ánodo** (pata larga) de cada LED.
-4. Conecta el otro extremo de las resistencias a los pines digitales del Arduino:
+2. Coloca los 5 LEDs en la protoboard. 
+3. Conecta una resistencia de **220 ohmios** desde el **cátodo** (pata corta o negativa) de cada LED hacia la línea negativa de la protoboard.
+4. Conecta el **ánodo** (pata larga o positiva) de cada LED directamente a los pines digitales del Arduino usando cables jumper de la siguiente manera:
 
 | Dedo de la Mano | Pin del Arduino |
 | :--- | :---: |
@@ -95,11 +95,17 @@ Busca la línea que dice comport = 'COM9'.
 Cambia 'COM9' por el número de puerto exacto que te mostró el Arduino IDE (ej. 'COM3').
 
 # ¡Correr el Programa!
-Para asegurarnos de que el sistema utiliza la versión correcta de Python, abre tu terminal en la carpeta principal y ejecuta:
+Para asegurarnos de que el sistema utiliza la versión correcta de Python, abre tu terminal en la carpeta principal 01-Cotrol-LED-Vision-Artificial y ejecuta en el cmd o en powershell:
+
 ```bash
 py -3.11 códigos/hand_tracker.py
 ```
-# Las Tecnologías (Librerías) que hacen esto posible
+🎉        ╰(*°▽°*)╯         🎉
+![Video del Resultado Final](./ruta/a/tu/video_resultado.gif)
+*(Reemplaza esta ruta con el GIF o video de tu proyecto funcionando)*
+
+
+# Más sobre las Tecnologías (Librerías) que hacen esto posible
 En el mundo de la programación, no necesitamos inventar la rueda cada vez. Usamos "librerías": paquetes de código que otras personas o empresas muy brillantes ya resolvieron y comparten gratuitamente. Para este proyecto, estamos parados sobre los hombros de cuatro "gigantes tecnológicos":
 
 **1. OpenCV (opencv-python):** Los "Ojos" del proyecto
