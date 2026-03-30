@@ -61,6 +61,9 @@ Sigue estos pasos para armar tu circuito. Recuerda que siempre debes usar una re
 **Jumpers**
 ![Jumpers](imagenes/Jumpers.jpeg)
 
+**Circuito Final**
+![Circuito Final](imagenes/Circuito%20Final.jpeg)
+
 
 ## 💻 Configuración del Software
 
