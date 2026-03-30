@@ -1,4 +1,5 @@
 # 🔵 ServoBLE - Portón Inteligente IoT
+**MakerLab - Universidad Cenfotec**
 
 ServoBLE es un sistema IoT desarrollado con **IdeaBoard (ESP32)** que integra un sensor ultrasónico y un servomotor controlado remotamente mediante Bluetooth Low Energy (BLE).
 
