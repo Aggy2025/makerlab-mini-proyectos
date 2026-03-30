@@ -106,7 +106,10 @@ Para asegurarnos de que el sistema utiliza la versión correcta de Python, abre 
 py -3.11 códigos/hand_tracker.py
 ```
 🎉        ╰(*°▽°*)╯         🎉
-![Video del Resultado Final]([Ver el video del programa funcionando](imagenes/Programa_Funcionando.mp4))
+![Video del Resultado Final](<video width="100%" controls>
+  <source src="imagenes/Programa_Funcioando.mp4" type="video/mp4">
+  Tu navegador no soporta la reproducción de video.
+</video>)
 
 
 # Más sobre las Tecnologías (Librerías) que hacen esto posible
