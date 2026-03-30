@@ -56,7 +56,7 @@ https://aggy2025.github.io/cenfobot-control/
 
 Escanea este código QR para abrir la interfaz web del Sumobot.
 
-![QR Control Sumobot](qr_sumobot_control.png)
+![QR Control Sumobot](imagenes/qr_sumobot_control.png)
 
 No es necesario instalar ninguna aplicación.  
 El control se realiza directamente desde el navegador.
