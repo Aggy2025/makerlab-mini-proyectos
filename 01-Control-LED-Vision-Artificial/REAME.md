@@ -34,8 +34,10 @@ En el mundo de la programación usamos "librerías", paquetes de código que res
 
 **Protoboard y Arduino UNO**
 ![Arduino y Protoboard](imagenes/Protoboard%20y%20Arduino%20UNO.jpeg)
-![Resistencias](./ruta/a/tu/foto_resistencias.jpg)
-![LEDs](./ruta/a/tu/foto_leds.jpg)
+
+**LEDs y Resistencias**
+![LEDs y Resistencias](imagenes/Leds%20y%20resistencias.jpeg)
+
 
 ---
 
