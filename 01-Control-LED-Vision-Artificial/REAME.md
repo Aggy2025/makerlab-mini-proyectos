@@ -58,6 +58,9 @@ Sigue estos pasos para armar tu circuito. Recuerda que siempre debes usar una re
 **LEDs y Resistencias**
 ![LEDs y Resistencias](imagenes/Leds%20y%20resistencias.jpeg)
 
+**Jumpers**
+![Jumpers](imagenes/Jumpers.jpeg)
+
 
 ## 💻 Configuración del Software
 
