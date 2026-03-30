@@ -1,8 +1,7 @@
 
 # Control remoto del Sumobot mediante Bluetooth Low Energy (BLE)
 
-Fiorella Pérez López  
-Universidad CENFOTEC
+Este proyecto es ideal para entender la integración entre el mundo físico (hardware) y desarrollo web(software).
 
 ---
 
