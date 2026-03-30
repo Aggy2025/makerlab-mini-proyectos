@@ -106,8 +106,7 @@ Para asegurarnos de que el sistema utiliza la versión correcta de Python, abre 
 py -3.11 códigos/hand_tracker.py
 ```
 🎉        ╰(*°▽°*)╯         🎉
-![Video del Resultado Final](./ruta/a/tu/video_resultado.gif)
-*(Reemplaza esta ruta con el GIF o video de tu proyecto funcionando)*
+![Video del Resultado Final]([Ver el video del programa funcionando](imagenes/Programa_Funcioando.mp4))
 
 
 # Más sobre las Tecnologías (Librerías) que hacen esto posible
