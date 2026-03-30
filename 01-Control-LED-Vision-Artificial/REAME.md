@@ -31,7 +31,7 @@ En el mundo de la programación usamos "librerías", paquetes de código que res
 | 1 | Cámara Web | Integrada en la PC o externa. |
 
 ### Galería de Componentes
-*(Inserta aquí las fotografías de tus componentes)*
+
 ![Arduino y Protoboard](imagenes/Protoboard%20y%20Arduino%20UNO.jpeg)
 ![Resistencias](./ruta/a/tu/foto_resistencias.jpg)
 ![LEDs](./ruta/a/tu/foto_leds.jpg)
