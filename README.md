@@ -18,7 +18,7 @@ Proveer ejemplos prácticos, replicables y educativos para estudiantes y visitan
 - Sensores y actuadores
 - Desarrollo web
 
-## 🚀 Cómo usar
+##  Cómo usar
 
 Cada carpeta contiene:
 
