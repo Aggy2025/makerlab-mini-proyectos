@@ -3,8 +3,6 @@
 > **MakerLab - Universidad Cenfotec**
 > Este proyecto es ideal para entender la integración entre el mundo físico (hardware) y la inteligencia artificial (software).
 
-![Video del Resultado Final](./ruta/a/tu/video_resultado.gif)
-*(Reemplaza esta ruta con el GIF o video de tu proyecto funcionando)*
 
 Este sistema permite controlar 5 LEDs físicos conectados a un Arduino utilizando gestos con la mano capturados a través de la cámara de una PC. Al levantar diferentes dedos frente a la cámara, el sistema enciende o apaga los LEDs correspondientes en tiempo real. 
 
