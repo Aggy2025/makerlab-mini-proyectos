@@ -105,7 +105,10 @@ Para asegurarnos de que el sistema utiliza la versión correcta de Python, abre 
 ```bash
 py -3.11 códigos/hand_tracker.py
 ```
+# ¡LISTO!
 🎉        ╰(*°▽°*)╯         🎉
+
+
 ![Programa_Funcionado](https://github.com/Aggy2025/makerlab-mini-proyectos/blob/main/01-Control-LED-Vision-Artificial/imagenes/Programa_Funcionando.gif)
 
 # Más sobre las Tecnologías (Librerías) que hacen esto posible
