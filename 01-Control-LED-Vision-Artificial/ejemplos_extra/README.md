@@ -69,7 +69,7 @@ py -3.11 1-hand_detector.py
 # 📂Catálogo de Códigos
 A continuación, se explica qué hace cada archivo y se incluye su código fuente.
 
-1️⃣ **Detector Básico de Manos (01-hand_detector.py)**
+# 1️⃣ Detector Básico de Manos (01-hand_detector.py)
 **¿Qué hace?** Es el "Hola Mundo" de MediaPipe. Abre tu cámara y dibuja el esqueleto digital (los 21 puntos clave o landmarks) sobre cualquier mano que aparezca en pantalla
 
 ```python
@@ -121,7 +121,8 @@ def run_hand_tracking():
 run_hand_tracking()
 ```
 
-**2️⃣ Control de Mouse con la Mano (02-hand_mouse.py)**
+# 2️⃣ Control de Mouse con la Mano (02-hand_mouse.py)
+
 **¿Qué hace?** Transforma tu dedo índice en el cursor de tu computadora. El script interpola la posición de tu dedo en la cámara con la resolución de tu monitor. Si bajas el dedo medio, el programa simula un "clic izquierdo". ¡Prueba cerrar ventanas o abrir carpetas sin tocar tu mouse físico!
 
 ```python
@@ -186,7 +187,8 @@ def hand_mouse_control():
 
 hand_mouse_control()
 ```
-3️⃣ **Contador de Dedos Matemático (03-hand_tracking.py)**
+# 3️⃣ Contador de Dedos Matemático (03-hand_tracking.py)
+
 **¿Qué hace?** En lugar de usar herramientas de terceros, este código incluye una función matemática nativa llamada fingers_up. Calcula si las puntas de tus dedos (tips) están por encima de tus nudillos para saber si están estirados o doblados, y muestra en tiempo real cuántos dedos estás levantando.
 ```python
 import cv2
@@ -282,7 +284,8 @@ def run_hand_tracking():
 
 run_hand_tracking()
 ```
-4️⃣ **Pizarra Virtual / Finger Paint (04-finger_paint.py)**
+# 4️⃣ Pizarra Virtual / Finger Paint (04-finger_paint.py)
+
 **¿Qué hace?** Convierte el aire en un lienzo. Usa tu dedo índice para dibujar en la pantalla en tiempo real. Utiliza geometría para medir la distancia entre tu pulgar y tu índice: si los juntas (haciendo una pinza o chasquido), la pantalla se borra instantáneamente.
 
 ```python
