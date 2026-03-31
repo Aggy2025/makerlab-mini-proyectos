@@ -1,222 +1,104 @@
+# 🤖 Cenfobot: Control Remoto BLE con Autocorrección (Giroscopio + PDI)
 
-# Control remoto del Sumobot mediante Bluetooth Low Energy (BLE)
+> **MakerLab - Universidad Cenfotec**
+> Este proyecto demuestra cómo integrar robótica móvil, control automático y desarrollo web. Es el ejemplo perfecto para entender cómo un navegador web puede controlar hardware complejo de forma inalámbrica sin instalar aplicaciones.
 
-**MakerLab - Universidad Cenfotec**
----
-
-# Introducción
-
-Este proyecto muestra cómo controlar un **Sumobot de forma remota utilizando Bluetooth Low Energy (BLE)** y una **interfaz web accesible desde el navegador**.
-
-En lugar de utilizar un control físico o un programa instalado en la computadora, el robot puede ser controlado directamente desde una **página web interactiva**. Esta página permite enviar comandos de movimiento al robot, el cual los interpreta y ejecuta en tiempo real.
-
-El robot utiliza un **sistema de control PDI basado en giroscopio** para mantener trayectorias rectas al avanzar o retroceder, compensando pequeñas diferencias entre los motores.
-
-Este proyecto combina conceptos de:
-
-- robótica móvil  
-- sistemas embebidos  
-- comunicación inalámbrica  
-- control automático  
-- interfaces web interactivas  
-- desarrollo web aplicado a robótica  
+Este proyecto permite controlar un **Sumobot (Cenfobot)** de forma remota utilizando Bluetooth Low Energy (BLE) a través de una página web interactiva. A diferencia de un carro a control remoto tradicional, este robot es "consciente" de su entorno: utiliza un giroscopio y un controlador matemático (PDI) para mantener líneas perfectamente rectas al avanzar o retroceder, compensando en tiempo real cualquier diferencia de fuerza entre sus motores.
 
 ---
 
-# ¿Qué es el control mediante BLE?
+## 🏎️ El Hardware Base: Sumobot Cenfotec
 
-Bluetooth Low Energy (BLE) es un protocolo de comunicación inalámbrica diseñado para dispositivos que requieren **bajo consumo energético**.
+Este proyecto utiliza exactamente el mismo chasis, motores y placa electrónica que usamos para las competencias universitarias. 
 
-En este proyecto, BLE permite que un **navegador web se conecte directamente al robot** sin necesidad de instalar aplicaciones adicionales.
+🔗 **[Ver Repositorio Oficial del Sumobot (Materiales y Ensamblaje)](https://github.com/Universidad-Cenfotec/Sumobot/blob/main/README.md)**
 
-El proceso de comunicación ocurre de la siguiente manera:
+**🔄 El Cambio de Enfoque (Autónomo vs. Teleoperado):**
+Mientras que en la competencia el robot es 100% autónomo y utiliza sensores infrarrojos para buscar y empujar a su oponente, en este proyecto le damos un enfoque de **Teleoperación Asistida e IoT (Internet of Things)**. 
 
-1. El robot inicia un servicio BLE.
-2. El navegador busca dispositivos BLE cercanos.
-3. El usuario selecciona el robot.
-4. La página web establece la conexión.
-5. La interfaz envía comandos de movimiento.
-6. El robot recibe los comandos y ejecuta la acción correspondiente.
-
-Este método permite controlar el robot de forma sencilla desde distintos dispositivos.
+Apagamos sus "instintos de batalla" y activamos su antena Bluetooth. Ahora el robot obedece comandos humanos enviados desde un navegador web, utilizando su giroscopio interno como asistencia de conducción para que el usuario no tenga que lidiar con las desviaciones mecánicas de los motores.
 
 ---
 
-# Interfaz web de control
+## 🧠 Tecnologías y Conceptos Clave
 
-La página se encuentra publicada mediante **GitHub Pages**, lo que permite acceder a ella desde cualquier navegador compatible.
+Para lograr que el robot navegue con precisión y se comunique con tu teléfono, usamos estos conceptos:
 
-### 🌐 Acceso a la interfaz
-
-https://aggy2025.github.io/cenfobot-control/
-
-## 📱 Controla el robot desde tu celular
-
-Escanea este código QR para abrir la interfaz web del Sumobot.
-
-![QR Control Sumobot](imagenes/qr_sumobot_control.png)
-
-No es necesario instalar ninguna aplicación.  
-El control se realiza directamente desde el navegador.
+* **📡 Bluetooth Low Energy (El Puente Invisible):** Un protocolo de comunicación de ultra bajo consumo. Permite enviar comandos instantáneos desde la web al robot.
+* **🌐 Web Bluetooth API (El Mando Universal):** Una tecnología que rompe barreras. Permite que navegadores como Chrome o Edge se conecten directamente al hardware por Bluetooth. ¡Cero descargas, cero instalaciones!
+* **⚖️ Giroscopio / IMU (El Oído Interno):** Un sensor que detecta la rotación y el equilibrio. Le dice al robot: *"Te estás desviando 2 grados a la izquierda"*.
+* **🧮 Controlador PDI (El Piloto Automático):** Un algoritmo matemático (Proporcional-Derivativo-Integral) que ajusta dinámicamente la velocidad de las llantas. Si el robot se desvía, el PDI frena un motor y acelera el otro en milisegundos para volver al rumbo recto.
+* **🚦 LED NeoPixel (El Semáforo de Estado):** Un indicador visual inteligente que nos muestra qué acción está ejecutando o pensando el robot en ese momento.
 
 ---
 
-# Compatibilidad con dispositivos
+## 🖼️ Galería y Centro de Control Web
 
-La interfaz fue diseñada para ser **responsive**, lo que significa que se adapta automáticamente al tamaño de la pantalla.
+Para controlar el robot, no necesitas descargar nada. La interfaz está alojada de forma pública y es 100% *responsive* (se adapta a la pantalla de tu computadora, tablet o celular).
 
-Esto permite controlar el robot desde distintos dispositivos.
+1. **Desde tu computadora:** Ingresa al siguiente enlace usando Google Chrome o Microsoft Edge:
+   🔗 **[Interfaz Web Cenfobot Control](https://aggy2025.github.io/cenfobot-control/)**
 
-| Dispositivo | Compatibilidad |
-|-------------|---------------|
-| Computadora (PC o laptop) | ✔ Compatible |
-| Teléfono móvil | ✔ Compatible |
-| Tablet | ✔ Compatible |
+2. **Desde tu teléfono móvil:** Escanea este código QR con tu cámara para abrir el control al instante:
 
-El control funciona en navegadores que soportan **Web Bluetooth**, como:
+   ![QR Cenfobot](imagenes/qr_sumobot_cotrol.png)
 
-- Google Chrome  
-- Microsoft Edge  
-- Opera  
-
-Actualmente **Safari no soporta Web Bluetooth**.
+*(Nota: Actualmente el navegador Safari en iOS no soporta Web Bluetooth nativo. Recomendamos usar Chrome en Android o en PC).*
 
 ---
 
-# Características de la interfaz
+## 💻 Configuración del Software y Archivos
 
-La página web incluye varios elementos para facilitar el control del robot.
+Todo el código de este proyecto está organizado para separar la interfaz de usuario de la lógica del robot:
 
-Entre ellos:
+* **`codigos/sumobot_ble.py`:** Es el código que debe subirse al microcontrolador del robot. Contiene la lógica del BLE, el control PDI y la lectura del giroscopio.
+* **`codigos/index.html`:** Contiene la interfaz web (botones, sliders y conexión BLE).
 
-- botones de dirección para controlar el movimiento
-- control deslizante para ajustar la velocidad
-- indicador de estado de conexión BLE
-- registro de mensajes enviados al robot
-- botón para limpiar el registro
-- LED virtual que muestra el estado del robot
-
----
-
-# Arquitectura del sistema
-
-El sistema se compone de tres componentes principales.
-
-### Robot Sumobot
-
-- controla los motores
-- lee el giroscopio
-- aplica el control PDI
-- recibe comandos BLE
-- controla el LED NeoPixel
-
-### Interfaz Web
-
-- permite enviar comandos desde el navegador
-- muestra indicadores visuales del estado del robot
-- permite ajustar la velocidad
-- registra los comandos enviados
-
-### Comunicación BLE
-
-- conecta la interfaz web con el robot
-- transmite instrucciones de movimiento en tiempo real
-- utiliza el servicio **BLE UART**
-
-
-# Comandos enviados al robot
-
-Los comandos enviados desde la interfaz siguen el formato:
-
-COMANDO,VELOCIDAD
-
-Ejemplo:
-F,0.5
-
-Esto indica que el robot debe **avanzar con una velocidad del 50%**.
+### 🚀 ¿Cómo usarlo?
+1. Enciende tu Cenfobot. El NeoPixel parpadeará indicando que está listo para emparejarse.
+2. Abre la interfaz web en tu dispositivo.
+3. Haz clic en el botón de conexión BLE y selecciona tu robot en el menú del navegador.
+4. Usa los botones en pantalla para mover el robot. ¡Observa cómo corrige su rumbo automáticamente si intentas empujarlo hacia los lados!
 
 ---
 
-# Instrucciones disponibles
+## 🎮 Comandos y Telemetría
 
-| Comando | Acción |
-|--------|------|
-| F | Avanzar |
-| B | Retroceder |
-| L | Girar izquierda |
-| R | Girar derecha |
-| S | Detener |
+### 1. Protocolo de Comunicación
+El navegador web y el robot se comunican usando un formato de texto muy simple: `COMANDO,VELOCIDAD`.
+* Ejemplo: Si la web envía `F,0.5`, el robot entiende: **"Avanzar (Forward) al 50% de mi capacidad máxima"**.
+* Ejemplo: Si envía `B,0.7`, el robot entiende: **"Retroceder (Backward) al 70%"**.
 
-Ejemplo enviado al robot:
+| Comando | Letra Clave | Acción en el Robot |
+| :---: | :---: | :--- |
+| **Avanzar** | `F` | Motores adelante + Control PDI activo |
+| **Retroceder** | `B` | Motores en reversa + Control PDI activo |
+| **Girar Izquierda** | `L` | Rotación sobre su propio eje |
+| **Girar Derecha** | `R` | Rotación sobre su propio eje |
+| **Detener** | `S` | Freno total de motores |
 
-Ejemplo enviado al robot:
+### 2. Estados Visuales (NeoPixel)
+El robot te hablará a través de la luz. La página web también tiene un LED virtual que se sincroniza con estos colores:
 
-
-Esto indica que el robot debe **retroceder al 70% de velocidad**.
-
----
-
-# Control de movimiento con giroscopio
-
-El robot utiliza un **sensor IMU con giroscopio**, el cual permite detectar la rotación del robot mientras se mueve.
-
-Para mantener una trayectoria recta se utiliza un **controlador PDI (Proporcional-Derivativo-Integral)**.
-
-Este controlador ajusta dinámicamente la velocidad de los motores utilizando una corrección basada en el error de orientación.
-
-
-Esto indica que el robot debe **retroceder al 70% de velocidad**.
+| Color del LED | Estado del Cenfobot |
+| :--- | :--- |
+| 🟢 **Verde** | Avanzando en línea recta. |
+| 🔴 **Rojo** | Retrocediendo. |
+| 🔵 **Cian** | Girando (Izquierda / Derecha). |
+| 🟡 **Amarillo** | Sistema en espera / Detenido. |
+| 🟠 **Naranja** | Calibración inicial del Giroscopio (¡No lo muevas!). |
 
 ---
 
-# Control de movimiento con giroscopio
+## 🔬 Aprendizajes Clave MakerLab
 
-El robot utiliza un **sensor IMU con giroscopio**, el cual permite detectar la rotación del robot mientras se mueve.
+Este proyecto lleva las bases de la robótica al siguiente nivel:
 
-Para mantener una trayectoria recta se utiliza un **controlador PDI (Proporcional-Derivativo-Integral)**.
+**1. El mundo físico no es perfecto:**
+Si le das la misma energía a dos motores idénticos, un robot nunca irá en línea recta perfecta por culpa de la fricción, el peso y el polvo. Aprender a implementar un **Control PDI con Giroscopio** es la solución profesional de la ingeniería: el robot mide su propio error y se autocorrige cientos de veces por segundo.
 
-Este controlador ajusta dinámicamente la velocidad de los motores utilizando una corrección basada en el error de orientación.
+**2. Web Bluetooth democratiza el hardware:**
+Programar aplicaciones nativas para Android y para iOS toma meses. Al usar la Web API, creamos un control remoto multiplataforma en un solo archivo `HTML`, haciendo la tecnología mucho más accesible para fines educativos.
 
-Si el robot comienza a desviarse hacia un lado, el sistema compensa automáticamente ajustando la velocidad de cada motor.
-
-Esto permite:
-
-- avanzar en línea recta  
-- retroceder con estabilidad  
-- reducir errores de trayectoria  
-
----
-
-# Indicadores visuales
-
-El robot utiliza un **LED NeoPixel** para indicar su estado.
-
-| Color | Estado |
-|------|------|
-| Verde | Avanzando |
-| Rojo | Retrocediendo |
-| Cian | Girando |
-| Amarillo | Detenido |
-| Naranja | Calibración inicial |
-
-La interfaz web incluye un **LED virtual sincronizado** que representa visualmente el estado del robot.
-
-# Archivos principales del proyecto
-
-El proyecto utiliza los siguientes archivos.
-
-| Archivo | Descripción |
-|------|------|
-| index.html | Interfaz web de control publicada en GitHub Pages |
-| sumobot_ble.py | Código principal del robot con comunicación BLE |
-| README.md | Documentación del proyecto |
-
-# Conclusión
-
-Este proyecto demuestra cómo es posible integrar **robótica, comunicación inalámbrica y desarrollo web** para crear un sistema de control remoto accesible desde cualquier navegador compatible.
-
-El uso de **BLE y Web Bluetooth** permite eliminar la necesidad de aplicaciones adicionales, facilitando la interacción entre el usuario y el robot.
-
-Además, el uso de **control PDI con giroscopio** mejora la estabilidad del movimiento del robot, permitiendo trayectorias más precisas durante su operación.
-
-Este tipo de sistemas representa una forma moderna de conectar **hardware físico con interfaces web interactivas**, abriendo nuevas posibilidades para proyectos educativos y de investigación en robótica.
+**3. Telemetría y Feedback:**
+Un buen prototipo no solo obedece órdenes, también informa su estado. Sincronizar el estado de conexión y los colores del LED entre el hardware físico y la interfaz de usuario web cierra el ciclo completo de la **Interacción Humano-Máquina (HCI)**.
