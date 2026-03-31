@@ -115,9 +115,8 @@ Para visualizar el radar en tu pantalla, necesitamos preparar el entorno visual:
 # ¡LISTO!
 🎉        ╰(*°▽°*)╯         🎉
 
+![Radar_Funcionado](https://github.com/Aggy2025/makerlab-mini-proyectos/blob/main/04-Radar_Ultrasonico/imagenes/Radar_Funcionado.gif)
 
-![Programa_Funcionado](https://github.com/Aggy2025/makerlab-mini-proyectos/blob/main/04-Radar_Ultrasonico/imagenes/Radar_Funcionado.gif)
----
 
 ## 🔬 Más sobre las Tecnologías (Aprendizaje Maker)
 
