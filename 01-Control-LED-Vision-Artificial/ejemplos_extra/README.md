@@ -76,48 +76,63 @@ A continuación, se explica qué hace cada archivo y se incluye su código fuent
 import cv2
 import mediapipe as mp
 
+# Cargar los módulos de dibujo y detección de manos de MediaPipe
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
 mp_styles = mp.solutions.drawing_styles
 
 def run_hand_tracking():
+    # Iniciar la captura de video (0 suele ser la cámara web principal)
     cam = cv2.VideoCapture(0)
 
+    # Configurar el modelo de Inteligencia Artificial
     with mp_hands.Hands(
-        model_complexity=0,
-        max_num_hands=2,
-        min_detection_confidence=0.5,
-        min_tracking_confidence=0.5
+        model_complexity=0,         # 0 es más rápido, 1 es más preciso
+        max_num_hands=2,            # Número máximo de manos a detectar
+        min_detection_confidence=0.5, # Umbral de confianza para detectar (50%)
+        min_tracking_confidence=0.5   # Umbral de confianza para seguir el movimiento (50%)
     ) as hands:
 
+        # Bucle principal: se ejecuta mientras la cámara esté abierta
         while cam.isOpened():
-            success, frame = cam.read()
+            success, frame = cam.read() # Leer un cuadro (foto) de la cámara
 
             if not success:
                 print("Ignoring empty camera frame.")
                 continue
 
+            # MediaPipe requiere colores en formato RGB, pero OpenCV usa BGR por defecto.
+            # Aquí hacemos la conversión para que la IA entienda la imagen.
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+            
+            # Procesar la imagen y buscar manos
             results = hands.process(frame_rgb)
 
+            # Si se encontraron manos en la imagen...
             if results.multi_hand_landmarks:
+                # Recorrer cada mano detectada
                 for hand_landmarks in results.multi_hand_landmarks:
+                    # Dibujar los puntos (landmarks) y las líneas que los conectan
                     mp_drawing.draw_landmarks(
-                        frame,
-                        hand_landmarks,
-                        mp_hands.HAND_CONNECTIONS,
-                        mp_styles.get_default_hand_landmarks_style(),
-                        mp_styles.get_default_hand_connections_style(),
+                        frame, # Imagen donde vamos a dibujar
+                        hand_landmarks, # Coordenadas de los puntos de la mano
+                        mp_hands.HAND_CONNECTIONS, # Conexiones (huesos)
+                        mp_styles.get_default_hand_landmarks_style(), # Estilo de los puntos
+                        mp_styles.get_default_hand_connections_style(), # Estilo de las líneas
                     )
 
+            # Mostrar el resultado en una ventana (cv2.flip crea un efecto espejo)
             cv2.imshow("Detector de manos", cv2.flip(frame, 1))
 
+            # Esperar 1 milisegundo por si el usuario presiona la tecla 'q' para salir
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
 
+    # Liberar la cámara y cerrar todas las ventanas al terminar
     cam.release()
     cv2.destroyAllWindows()
 
+# Ejecutar la función
 run_hand_tracking()
 ```
 
@@ -131,18 +146,21 @@ import mediapipe as mp
 import pyautogui
 import numpy as np
 
+# Inicializar módulos de MediaPipe
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
 
-screen_w, screen_h = pyautogui.size()  # resolución de pantalla
+# Obtener la resolución exacta de tu monitor (ej. 1920x1080)
+screen_w, screen_h = pyautogui.size()
 
 def hand_mouse_control():
     cam = cv2.VideoCapture(0)
-    cam.set(3, 640)  # ancho cámara
-    cam.set(4, 480)  # alto cámara
+    # Ajustar la resolución de la cámara para que el proceso sea rápido
+    cam.set(3, 640)  # ancho
+    cam.set(4, 480)  # alto
 
     with mp_hands.Hands(
-        max_num_hands=1,
+        max_num_hands=1, # Solo queremos controlar el mouse con 1 mano a la vez
         min_detection_confidence=0.7,
         min_tracking_confidence=0.7
     ) as hands:
@@ -152,30 +170,40 @@ def hand_mouse_control():
             if not success:
                 continue
 
+            # Crear efecto espejo inmediatamente para coordinar mejor los movimientos
             frame = cv2.flip(frame, 1)
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             results = hands.process(frame_rgb)
 
             if results.multi_hand_landmarks:
+                # Tomar los datos de la primera mano detectada
                 hand_landmarks = results.multi_hand_landmarks[0]
 
-                # Coordenadas del dedo índice
+                # Obtener las coordenadas del PUNTO 8 (Punta del dedo índice)
                 index_finger_tip = hand_landmarks.landmark[8]
+                # Multiplicar por el tamaño del frame porque MediaPipe devuelve valores entre 0 y 1
                 x = int(index_finger_tip.x * frame.shape[1])
                 y = int(index_finger_tip.y * frame.shape[0])
 
-                # Mapear a resolución de pantalla
+                # MATEMÁTICAS: Regla de tres (Interpolación)
+                # Convertir las coordenadas de la cámara (pequeñas) a las de la pantalla (grandes)
                 mouse_x = np.interp(x, [0, frame.shape[1]], [0, screen_w])
                 mouse_y = np.interp(y, [0, frame.shape[0]], [0, screen_h])
 
+                # Mover el mouse real de la computadora
                 pyautogui.moveTo(mouse_x, mouse_y)
 
-                # Detectar si dedo medio bajado para clic
+                # DETECCIÓN DE CLIC:
+                # Obtener las coordenadas del dedo medio
                 middle_finger_tip = hand_landmarks.landmark[12]
+                
+                # Si la punta del índice está ARRIBA de su nudillo (dedo estirado)
+                # Y la punta del medio está ABAJO de su nudillo (dedo doblado hacia abajo)
                 if index_finger_tip.y < hand_landmarks.landmark[6].y and \
-                   middle_finger_tip.y < hand_landmarks.landmark[10].y:
-                    pyautogui.click()  # clic izquierdo
+                   middle_finger_tip.y > hand_landmarks.landmark[10].y:
+                    pyautogui.click()  # Simular clic izquierdo
 
+                # Dibujar esqueleto para visualizar
                 mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
             cv2.imshow("Hand Mouse Control", frame)
@@ -194,36 +222,40 @@ hand_mouse_control()
 import cv2
 import mediapipe as mp
 
-# Inicializar MediaPipe Hands y utilidades de dibujo
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
 mp_styles = mp.solutions.drawing_styles
 
-# Función para detectar dedos levantados
+# Función personalizada para saber qué dedos están levantados
 def fingers_up(hand_landmarks, hand_label):
     fingers = []
 
-    # Dedos excepto pulgar
+    # Identificadores de las puntas de los dedos: índice(8), medio(12), anular(16), meñique(20)
     tips_ids = [8, 12, 16, 20]
+    
+    # Evaluar los 4 dedos largos
     for tip_id in tips_ids:
-        # Comparar la y del tip con la y del pip
+        # En la pantalla, la coordenada Y aumenta hacia abajo. 
+        # Si la Y de la punta es MENOR que la Y de dos nudillos más abajo, el dedo está levantado.
         if hand_landmarks.landmark[tip_id].y < hand_landmarks.landmark[tip_id - 2].y:
-            fingers.append(1)
+            fingers.append(1) # Levantado
         else:
-            fingers.append(0)
+            fingers.append(0) # Doblado
 
-    # Pulgar
-    if hand_label == "Right":
+    # Evaluar el pulgar (su mecánica es diferente, se mueve en el eje X, no en el Y)
+    if hand_label == "Right": # Si es la mano derecha
+        # Compara la posición horizontal de la punta (4) con el nudillo (3)
         if hand_landmarks.landmark[4].x > hand_landmarks.landmark[3].x:
             fingers.append(1)
         else:
             fingers.append(0)
-    else:
+    else: # Si es la mano izquierda
         if hand_landmarks.landmark[4].x < hand_landmarks.landmark[3].x:
             fingers.append(1)
         else:
             fingers.append(0)
 
+    # Retorna una lista de 5 números (ej. [1, 0, 0, 0, 0] significa solo pulgar levantado)
     return fingers
 
 def run_hand_tracking():
@@ -242,39 +274,43 @@ def run_hand_tracking():
                 print("Ignorando frame vacío")
                 continue
 
-            # Espejo
-            frame = cv2.flip(frame, 1)
+            frame = cv2.flip(frame, 1) # Efecto espejo vital para la lógica del pulgar
             frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
             results = hands.process(frame_rgb)
 
             total_fingers = 0
 
             if results.multi_hand_landmarks:
+                # zip une las coordenadas de la mano con la etiqueta (Izquierda/Derecha)
                 for hand_landmarks, handedness in zip(results.multi_hand_landmarks, results.multi_handedness):
-                    hand_label = handedness.classification[0].label
+                    hand_label = handedness.classification[0].label # "Left" o "Right"
+                    
+                    # Dibujar puntos
                     mp_drawing.draw_landmarks(
-                        frame,
-                        hand_landmarks,
-                        mp_hands.HAND_CONNECTIONS,
+                        frame, hand_landmarks, mp_hands.HAND_CONNECTIONS,
                         mp_styles.get_default_hand_landmarks_style(),
                         mp_styles.get_default_hand_connections_style()
                     )
 
+                    # Llamar a nuestra función matemática
                     fingers = fingers_up(hand_landmarks, hand_label)
+                    # Sumar los 1s de la lista para saber el total de dedos levantados
                     total_fingers += sum(fingers)
 
-                    # Coordenadas de la muñeca para colocar el número
+                    # Obtener la coordenada de la muñeca (punto 0) para escribir el número encima de cada mano
                     wrist = hand_landmarks.landmark[0]
                     h, w, _ = frame.shape
                     cx, cy = int(wrist.x * w), int(wrist.y * h)
 
+                    # Escribir el número de dedos de cada mano cerca de su muñeca
                     cv2.putText(frame, f"{sum(fingers)}", (cx, cy - 20),
                                 cv2.FONT_HERSHEY_SIMPLEX, 2, (0, 255, 0), 3)
 
+            # Escribir el total sumado de ambas manos en la esquina superior izquierda
             cv2.putText(frame, f"Total dedos: {total_fingers}", (50, 50),
                         cv2.FONT_HERSHEY_SIMPLEX, 1.5, (255, 0, 0), 3)
 
-            cv2.imshow("Detector de manos", frame)
+            cv2.imshow("Contador Matematico", frame)
 
             if cv2.waitKey(1) & 0xFF == ord("q"):
                 break
@@ -296,25 +332,27 @@ import numpy as np
 mp_hands = mp.solutions.hands
 mp_drawing = mp.solutions.drawing_utils
 
-# Colores iniciales y canvas
-colors = [(0, 0, 255), (255, 0, 0), (0, 255, 0)]  # rojo, azul, verde
+# Definir una lista de colores (Formato BGR de OpenCV: Azul, Verde, Rojo)
+colors = [(0, 0, 255), (255, 0, 0), (0, 255, 0)]  # Rojo, Azul, Verde
 color_index = 0
 brush_color = colors[color_index]
 brush_thickness = 5
 
+# Variable global que actuará como nuestro lienzo transparente
 canvas = None
 
 def finger_paint():
     global canvas, brush_color, color_index
 
     cam = cv2.VideoCapture(0)
-    cam.set(3, 1280)  # ancho
-    cam.set(4, 720)   # alto
+    cam.set(3, 1280)  # Establecer resolución HD para tener más espacio de dibujo
+    cam.set(4, 720)
 
+    # Variables para recordar dónde estaba el dedo un instante atrás y poder trazar una línea
     prev_x, prev_y = None, None
 
     with mp_hands.Hands(
-        model_complexity=1,
+        model_complexity=1, # Subimos la complejidad para más precisión al dibujar
         max_num_hands=2,
         min_detection_confidence=0.7,
         min_tracking_confidence=0.7
@@ -325,7 +363,9 @@ def finger_paint():
             if not success:
                 continue
 
-            frame = cv2.flip(frame, 1)  # espejo
+            frame = cv2.flip(frame, 1)  # Espejo
+
+            # Si es la primera vez que corre, crear un lienzo negro del mismo tamaño que la cámara
             if canvas is None:
                 canvas = np.zeros_like(frame)
 
@@ -334,43 +374,50 @@ def finger_paint():
 
             if results.multi_hand_landmarks:
                 for hand_landmarks in results.multi_hand_landmarks:
-                    # Coord dedo índice (landmark 8)
+                    # 1. Extraer las coordenadas del índice (pincel)
                     x = int(hand_landmarks.landmark[8].x * frame.shape[1])
                     y = int(hand_landmarks.landmark[8].y * frame.shape[0])
 
-                    # Coord pulgar (landmark 4) para detectar gesto de puño cerrado
+                    # 2. Extraer los puntos del pulgar y el índice para calcular distancia
                     thumb_tip = hand_landmarks.landmark[4]
                     index_tip = hand_landmarks.landmark[8]
 
-                    # Calcular distancia pulgar-indice para gesto de borrado
+                    # GEOMETRÍA: Calcular la distancia (Hipotenusa) entre pulgar e índice
                     dist = np.hypot((thumb_tip.x - index_tip.x) * frame.shape[1],
                                     (thumb_tip.y - index_tip.y) * frame.shape[0])
 
-                    # Borrar pantalla si distancia < cierto umbral (pulgar tocando índice)
+                    # 3. GESTO DE BORRAR: Si la distancia es menor a 40 píxeles (dedos tocándose)
                     if dist < 40:
-                        canvas = np.zeros_like(frame)
-                        prev_x, prev_y = None, None
+                        canvas = np.zeros_like(frame) # Resetear el lienzo a negro
+                        prev_x, prev_y = None, None   # Soltar el trazo
 
-                    # Cambiar color si mano abierta (solo ejemplo)
+                    # 4. GESTO CAMBIO DE COLOR: Si abres toda la mano (dedo medio estirado)
+                    # Cambia de color iterando por la lista de forma cíclica
                     if hand_landmarks.landmark[12].y < hand_landmarks.landmark[9].y:
                         color_index = (color_index + 1) % len(colors)
                         brush_color = colors[color_index]
 
-                    # Dibujar línea si hay posición previa
+                    # 5. DIBUJAR: Si ya teníamos un punto anterior, trazar una línea hasta el nuevo punto
                     if prev_x is not None and prev_y is not None:
                         cv2.line(canvas, (prev_x, prev_y), (x, y), brush_color, brush_thickness)
 
+                    # Guardar la posición actual como la "anterior" para el siguiente ciclo
                     prev_x, prev_y = x, y
 
+                    # Dibujar el esqueleto (opcional, ayuda a ver la detección)
                     mp_drawing.draw_landmarks(frame, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
             else:
+                # Si no hay manos en pantalla, soltar el trazo para que no se dibujen líneas rectas feas al regresar
                 prev_x, prev_y = None, None
 
-            # Superponer canvas sobre frame
+            # FUSIÓN: Combinar el cuadro de la cámara real (frame) con el lienzo de dibujo (canvas)
+            # addWeighted mezcla las imágenes (70% cámara, 30% dibujos) para que parezca un holograma
             frame = cv2.addWeighted(frame, 0.7, canvas, 0.3, 0)
 
-            cv2.imshow("Finger Paint", frame)
+            cv2.imshow("Finger Paint MakerLab", frame)
+            
+            # Presionar 'q' para salir
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break
 
