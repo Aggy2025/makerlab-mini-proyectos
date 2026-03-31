@@ -112,6 +112,11 @@ Para visualizar el radar en tu pantalla, necesitamos preparar el entorno visual:
 3. Haz clic en el botón **Play** (el triángulo arriba a la izquierda).
 4. Pon tu mano o un objeto frente al radar y observa cómo cambia el ecosistema visual, el LED y el sonido de alerta. 🎉
 
+# ¡LISTO!
+🎉        ╰(*°▽°*)╯         🎉
+
+
+![Programa_Funcionado](https://github.com/Aggy2025/makerlab-mini-proyectos/blob/main/01-Control-LED-Vision-Artificial/imagenes/Programa_Funcionando.gif)
 ---
 
 ## 🔬 Más sobre las Tecnologías (Aprendizaje Maker)
