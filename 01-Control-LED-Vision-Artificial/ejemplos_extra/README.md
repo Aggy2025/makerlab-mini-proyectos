@@ -82,5 +82,5 @@ A continuación, se explica qué hace cada archivo. ¡Haz clic en el título de 
 **¿Qué hace?** En lugar de usar herramientas de terceros, este código incluye una función matemática nativa llamada fingers_up. Calcula si las puntas de tus dedos (tips) están por encima de tus nudillos para saber si están estirados o doblados, y muestra en tiempo real cuántos dedos estás levantando.
 
 # 4️⃣ Pizarra Virtual / Finger Paint (04-finger_paint.py)
-[Pizarra Virtual / Finger Paint](https://github.com/Aggy2025/makerlab-mini-proyectos/blob/main/01-Control-LED-Vision-Artificial/ejemplos_extra/codigos/04-finger_print.py)
+[Pizarra Virtual / Finger Paint](https://github.com/Aggy2025/makerlab-mini-proyectos/blob/main/01-Control-LED-Vision-Artificial/ejemplos_extra/codigos/04-finger_paint.py)
 **¿Qué hace?** Convierte el aire en un lienzo. Usa tu dedo índice para dibujar en la pantalla en tiempo real. Utiliza geometría para medir la distancia entre tu pulgar y tu índice: si los juntas (haciendo una pinza o chasquido), la pantalla se borra instantáneamente.
