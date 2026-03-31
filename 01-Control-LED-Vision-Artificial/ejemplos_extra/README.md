@@ -71,13 +71,16 @@ A continuación, se explica qué hace cada archivo. ¡Haz clic en el título de 
 
 # 1️⃣ Detector Básico de Manos (01-hand_detector.py)!
 [Detector Básico de Manos](https://github.com/Aggy2025/makerlab-mini-proyectos/blob/main/01-Control-LED-Vision-Artificial/ejemplos_extra/codigos/01-hand_detector.py)
-¿Qué hace? Es el "Hola Mundo" de MediaPipe. Abre tu cámara y dibuja el esqueleto digital (los 21 puntos clave o landmarks) sobre cualquier mano que aparezca en pantalla.
+**¿Qué hace?** Es el "Hola Mundo" de MediaPipe. Abre tu cámara y dibuja el esqueleto digital (los 21 puntos clave o landmarks) sobre cualquier mano que aparezca en pantalla.
 
-2️⃣ Control de Mouse con la Mano (02-hand_mouse.py)
-¿Qué hace? Transforma tu dedo índice en el cursor de tu computadora. El script interpola la posición de tu dedo en la cámara con la resolución de tu monitor. Si bajas el dedo medio, el programa simula un "clic izquierdo". ¡Prueba cerrar ventanas o abrir carpetas sin tocar tu mouse físico!
+# 2️⃣ Control de Mouse con la Mano (02-hand_mouse.py)
+[Control de Mouse con la Mano](https://github.com/Aggy2025/makerlab-mini-proyectos/blob/main/01-Control-LED-Vision-Artificial/ejemplos_extra/codigos/02-hand_mouse.py)
+**¿Qué hace?** Transforma tu dedo índice en el cursor de tu computadora. El script interpola la posición de tu dedo en la cámara con la resolución de tu monitor. Si bajas el dedo medio, el programa simula un "clic izquierdo". ¡Prueba cerrar ventanas o abrir carpetas sin tocar tu mouse físico!
 
-3️⃣ Contador de Dedos Matemático (03-hand_tracking.py)
-¿Qué hace? En lugar de usar herramientas de terceros, este código incluye una función matemática nativa llamada fingers_up. Calcula si las puntas de tus dedos (tips) están por encima de tus nudillos para saber si están estirados o doblados, y muestra en tiempo real cuántos dedos estás levantando.
+# 3️⃣ Contador de Dedos Matemático (03-hand_tracking.py)
+[Contador de Dedos Matemático](https://github.com/Aggy2025/makerlab-mini-proyectos/blob/main/01-Control-LED-Vision-Artificial/ejemplos_extra/codigos/03-hand_tracking.py)
+**¿Qué hace?** En lugar de usar herramientas de terceros, este código incluye una función matemática nativa llamada fingers_up. Calcula si las puntas de tus dedos (tips) están por encima de tus nudillos para saber si están estirados o doblados, y muestra en tiempo real cuántos dedos estás levantando.
 
-4️⃣ Pizarra Virtual / Finger Paint (04-finger_paint.py)
-¿Qué hace? Convierte el aire en un lienzo. Usa tu dedo índice para dibujar en la pantalla en tiempo real. Utiliza geometría para medir la distancia entre tu pulgar y tu índice: si los juntas (haciendo una pinza o chasquido), la pantalla se borra instantáneamente.
+# 4️⃣ Pizarra Virtual / Finger Paint (04-finger_paint.py)
+[Pizarra Virtual / Finger Paint](https://github.com/Aggy2025/makerlab-mini-proyectos/blob/main/01-Control-LED-Vision-Artificial/ejemplos_extra/codigos/04-finger_print.py)
+**¿Qué hace?** Convierte el aire en un lienzo. Usa tu dedo índice para dibujar en la pantalla en tiempo real. Utiliza geometría para medir la distancia entre tu pulgar y tu índice: si los juntas (haciendo una pinza o chasquido), la pantalla se borra instantáneamente.
