@@ -106,7 +106,8 @@ Para asegurarnos de que el sistema utiliza la versión correcta de Python, abre 
 py -3.11 códigos/hand_tracker.py
 ```
 🎉        ╰(*°▽°*)╯         🎉
-![Circuito Final](imagenes/Programa_Funcionando.gif)
+![Programa_Funcionado
+](imagenes/Programa_Funcionando.gif)
 
 # Más sobre las Tecnologías (Librerías) que hacen esto posible
 En el mundo de la programación, no necesitamos inventar la rueda cada vez. Usamos "librerías": paquetes de código que otras personas o empresas muy brillantes ya resolvieron y comparten gratuitamente. Para este proyecto, estamos parados sobre los hombros de cuatro "gigantes tecnológicos":
