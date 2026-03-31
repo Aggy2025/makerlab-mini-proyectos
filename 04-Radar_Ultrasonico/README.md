@@ -27,60 +27,80 @@ Para que este radar funcione, conectamos el mundo físico con el digital usando 
 | 1 | Servo SG90 | Motor de rotación de 180°. |
 | 1 | LED | Indicador visual de alerta física. |
 | 1 | Resistencia 220Ω | Para proteger el LED. |
+| 1 | Protoboard | Placa de pruebas para los circuitos. |
 | 1 | Caja de Baterías 4xAA | **Fuente externa necesaria** para el motor. |
 | Varios | Cables Jumper | Macho-Macho para las interconexiones. |
 
 ---
 
-## 🔌 Conexiones de Hardware
+## 🔌 Conexiones de Hardware (MUY IMPORTANTE)
 
-Sigue estos pasos con cuidado. Recuerda que los motores (servos) consumen mucha energía y pueden reiniciar tu Arduino si no usas la fuente externa.
+Armar este circuito requiere atención especial a la **distribución de energía**. Los servomotores son como "músculos" y consumen demasiada corriente. Si intentas alimentarlo directamente del Arduino, provocarás reinicios en la placa.
 
-**⚠️ Regla de Oro Maker:** Conecta el cable negro (GND) de las baterías al pin **GND** de Arduino. Todos los componentes deben compartir la misma "tierra" para que las señales eléctricas se entiendan.
+**Solución aplicada:** Añadimos una fuente externa (Caja de 4 baterías AA) exclusivamente para darle potencia al circuito.
 
-### Esquema de Pines:
+### 1. Distribución de Energía y Regla de Oro
+* **Arduino 5V** ➡️ Línea positiva (+) de la protoboard.
+* **Arduino GND** ➡️ Línea negativa (-) de la protoboard.
+* **Caja de Baterías 4xAA** ➡️ Conectar sus cables a las líneas (+) y (-) de la protoboard.
+* **⚠️ REGLA DE ORO MAKER:** ¡TODOS LOS GND DEBEN ESTAR CONECTADOS EN COMÚN! El GND del Arduino, el GND de las baterías y el GND de los componentes deben compartir la misma línea negativa de la protoboard para que las señales eléctricas se entiendan.
 
-| Componente | Pin Arduino | Nota |
-| :--- | :---: | :--- |
-| **LED (Ánodo)** | **Pin 7** | Usar resistencia de 220Ω al GND. |
-| **Ultrasonido TRIG** | **Pin 8** | Disparador del pulso de sonido. |
-| **Ultrasonido ECHO** | **Pin 9** | Receptor del eco del sonido. |
-| **Servo (Señal)** | **Pin 11** | Cable naranja o amarillo del motor. |
+### 2. Conexiones por Componente
+
+| Componente | Pin / Cable | Conexión en Protoboard / Arduino |
+| :--- | :--- | :--- |
+| **LED de Alerta** | Patita Corta (Cátodo) | A la resistencia de 220Ω, y de ahí a la línea negativa (-). |
+| | Patita Larga (Ánodo) | Directo al **Pin 7** del Arduino. |
+| **Sensor Ultrasónico**| VCC | Línea positiva (+). |
+| | GND | Línea negativa (-). |
+| | TRIG | Directo al **Pin 8** del Arduino. |
+| | ECHO | Directo al **Pin 9** del Arduino. |
+| **Servo Motor** | Rojo (VCC) | Línea positiva (+). |
+| | Negro/Marrón (GND)| Línea negativa (-). |
+| | Naranja (Señal) | Directo al **Pin 11** del Arduino. |
 
 ---
 
-### Galería de Componentes
+## 🖼️ Galería de Componentes
 
-**Montaje del Sensor y Servo**
-![Sensor y Servo](imagenes/sensor_servo.jpg)
+Para replicar este proyecto, asegúrate de que tu montaje luzca como en estas referencias:
 
-**Gestión de Energía (Baterías)**
+**Circuito General**
+![Circuito General](imagenes/circuito.jpg)
+
+**Detalle de Alimentación de Baterías**
 ![Conexión Baterías](imagenes/conexion_baterias.jpg)
 
-**Circuito Final Terminado**
-![Circuito Final](imagenes/circuito_final.jpg)
+**Radar en Funcionamiento**
+![Radar Funcionando](imagenes/radar_funcionando.jpg)
 
 ---
 
 ## 💻 Configuración del Software
 
 ### 1. Preparación del Arduino
+El código responsable de mover el motor y medir las distancias se encuentra en la carpeta `codigos/`.
 1. Conecta el Arduino a la PC y abre el **Arduino IDE**.
-2. Carga el código localizado en `codigos/radar_arduino.ino`.
-3. Selecciona tu placa, el puerto correspondiente y haz clic en **Subir**.
+2. Abre el archivo `codigos/radar_arduino/radar_arduino.ino`.
+3. Selecciona tu placa, el puerto COM correspondiente y haz clic en **Subir**.
 
 ### 2. Configuración de Processing
-Para visualizar el radar en tu pantalla, necesitamos preparar el entorno de Processing:
+Para visualizar el radar en tu pantalla, necesitamos preparar el entorno visual:
 1. Descarga e instala [Processing](https://processing.org/).
-2. **Instalar Librerías:** Ve a `Sketch` > `Import Library` > `Add Library...` y busca:
+2. **Instalar Librerías:** En Processing, ve a `Sketch` > `Import Library` > `Add Library...` y busca:
    * **Serial** (para la comunicación con Arduino).
    * **Sound** (para activar la alarma auditiva).
-3. **Carpeta de Sonido:** Localiza el archivo `alarm-sfx-sound.wav`. Debes crear una carpeta llamada `data` dentro de la carpeta donde guardaste tu código de Processing y pegar el archivo ahí.
+3. **Carpeta de Sonido:** Localiza el archivo `alarm-sfx-sound.wav`. Debes crear una carpeta llamada `data` dentro de la carpeta `codigos/radar_visualizer/` y pegar el archivo de audio ahí adentro.
+4. **⚠️ Configurar el Puerto COM:** Abre el archivo `codigos/radar_visualizer/radar_visualizer.pde`. Busca la línea `myPort = new Serial(this,"COM9",9600);` y cambia `"COM9"` por el número de puerto exacto que te mostró el Arduino IDE (ej. `"COM3"`).
 
-### 3. Ejecución
-1. Con Arduino conectado, abre el archivo `codigos/radar_visualizer.pde` en Processing.
-2. Haz clic en el botón **Play** (el triángulo arriba a la izquierda).
-3. ¡Verás cómo el radar cobra vida en tu pantalla!
+---
+
+## 🚀 Ejecución
+
+1. Asegúrate de que las baterías externas estén encendidas o conectadas al circuito.
+2. Abre tu código `radar_visualizer.pde` en Processing.
+3. Haz clic en el botón **Play** (el triángulo arriba a la izquierda).
+4. Pon tu mano o un objeto frente al radar y observa cómo cambia el ecosistema visual, el LED y el sonido de alerta. 🎉
 
 ---
 
@@ -98,4 +118,3 @@ El código debe estar perfectamente balanceado. Si el servo gira demasiado rápi
 Si el radar no se mueve en la pantalla, aprendemos a usar el **Monitor Serie**. Si los números aparecen ahí, sabemos que el problema no es el cable ni el Arduino, sino el código de Processing. Dividir el problema en partes es la base de la ingeniería.
 
 ---
-**¿Dudas o mejoras?** ¡Visítanos en el MakerLab y comparte tu versión del proyecto! 🚀
