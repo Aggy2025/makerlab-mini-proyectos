@@ -41,7 +41,7 @@ Para controlar el robot, no necesitas descargar nada. La interfaz está alojada 
 
 2. **Desde tu teléfono móvil:** Escanea este código QR con tu cámara para abrir el control al instante:
 
-   ![QR Cenfobot](imagenes/qr_sumobot_cotrol.png)
+   ![QR Cenfobot](imagenes/qr_sumobot_control.png)
 
 *(Nota: Actualmente el navegador Safari en iOS no soporta Web Bluetooth nativo. Recomendamos usar Chrome en Android o en PC).*
 
