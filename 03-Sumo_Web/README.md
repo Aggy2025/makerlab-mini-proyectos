@@ -41,7 +41,7 @@ Para controlar el robot, no necesitas descargar nada. La interfaz está alojada 
 
 2. **Desde tu teléfono móvil:** Escanea este código QR con tu cámara para abrir el control al instante:
 
-   ![QR Cenfobot](imagenes/qr_sumobot_control.png)
+   ![QR Cenfobot](imagenes/qr_cenfobot.svg)
 
 *(Nota: Actualmente el navegador Safari en iOS no soporta Web Bluetooth nativo. Recomendamos usar Chrome en Android o en PC).*
 
@@ -49,14 +49,27 @@ Para controlar el robot, no necesitas descargar nada. La interfaz está alojada 
 
 ## 💻 Configuración del Software y Archivos
 
-Todo el código de este proyecto está organizado para separar la interfaz de usuario de la lógica del robot:
+Este proyecto está dividido en dos partes: el código que vive en la placa (Hardware) y la interfaz gráfica (Web).
 
-* **`codigos/sumobot_ble.py`:** Es el código que debe subirse al microcontrolador del robot. Contiene la lógica del BLE, el control PDI y la lectura del giroscopio.
-* **`codigos/index.html`:** Contiene la interfaz web (botones, sliders y conexión BLE).
+### 1. El Cerebro Físico (Hardware)
+La placa de nuestro Sumobot utiliza **CircuitPython**. Para programarla, no necesitas instalar programas pesados, ¡podemos hacerlo todo desde el navegador web!
 
-### 🚀 ¿Cómo usarlo?
-1. Enciende tu Cenfobot. El NeoPixel parpadeará indicando que está listo para emparejarse.
-2. Abre la interfaz web en tu dispositivo.
+Utilizaremos el **IdeaCode Web IDE**, una herramienta que te permite ver y editar directamente los archivos dentro del IdeaBoard(cerebro del sumobot):
+🔗 **[Acceder a IdeaCode (Editor Web)](https://ideacode.crcibernetica.com/)**
+
+**Pasos para cargar el código:**
+1. Conecta tu robot a la computadora mediante un cable USB.
+2. Abre IdeaCode en Google Chrome o Edge, haz clic en el botón de conexión serial y selecciona el puerto en el que esta conectada la placa.
+3. A la izquierda verás los archivos de tu robot. Tienes dos opciones para cargar nuestro sistema BLE:
+   * **Opción A (Recomendada):** Crea un archivo llamado `sumobot_ble.py`, pega ahí el código fuente de nuestro proyecto y guárdalo. Luego, abre el archivo maestro llamado `code.py` (este es el archivo que la placa ejecuta automáticamente al encender) y escribe únicamente esta línea: `import sumobot_ble`.
+   * **Opción B (Directa):** Abre el archivo `code.py` y pega directamente todo el código del proyecto ahí.
+
+### 2. El Centro de Control (Web)
+El código de la interfaz gráfica se encuentra en `codigos/index.html`. No necesitas modificarlo para jugar, ya que está subido a GitHub Pages, pero puedes abrirlo en tu editor de código favorito si deseas personalizar los botones o los colores de tu control remoto.
+
+### 🚀 ¿Cómo iniciar la conexión?
+1. Enciende tu Cenfobot (o desconéctalo del USB y ponle baterías). El NeoPixel parpadeará indicando que está listo para emparejarse.
+2. Abre la interfaz web en tu dispositivo (usando el link o el QR).
 3. Haz clic en el botón de conexión BLE y selecciona tu robot en el menú del navegador.
 4. Usa los botones en pantalla para mover el robot. ¡Observa cómo corrige su rumbo automáticamente si intentas empujarlo hacia los lados!
 
