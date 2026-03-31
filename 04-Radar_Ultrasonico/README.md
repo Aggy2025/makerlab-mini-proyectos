@@ -65,14 +65,24 @@ Armar este circuito requiere atención especial a la **distribución de energía
 
 Para replicar este proyecto, asegúrate de que tu montaje luzca como en estas referencias:
 
-**Circuito General**
-![Circuito General](imagenes/circuito.jpg)
 
-**Detalle de Alimentación de Baterías**
-![Conexión Baterías](imagenes/conexion_baterias.jpg)
+**Protoboard y Arduino UNO**
+![Arduino y Protoboard](imagenes/Protoboard%20y%20Arduino%20UNO.jpeg)
 
-**Radar en Funcionamiento**
-![Radar Funcionando](imagenes/radar_funcionando.jpg)
+**Servomotor y sensor ultrasónico**
+![Servo_Ultrasónico](imagenes/Servo_Ultrasónico.jpeg)
+
+**Baterías**
+![Baterías](imagenes/Caja_Baterías.jpeg)
+
+**LED y Resistencia**
+![LEDs y Resistencias](imagenes/Resistencia_LED.jpeg)
+
+**Jumpers**
+![Jumpers](imagenes/Jumpers.jpeg)
+
+**Resultado**
+![Circuito Final](imagenes/Resultado.jpeg)
 
 ---
 
