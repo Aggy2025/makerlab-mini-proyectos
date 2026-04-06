@@ -1,5 +1,4 @@
-# 🤖 05-Microbit_MachineLearning: El Despertar de los Sentidos (IA + Hardware)
-
+# 🤖 05-Microbit_MachineLearning: Conectando la IA al Mundo Físico
 MakerLab - Universidad Cenfotec. Este proyecto está diseñado para introducir a los estudiantes en la integración de la **Inteligencia Artificial (Machine Learning)** con el hardware físico. 
 
 El objetivo general es demostrar cómo una computadora puede "aprender a ver" el mundo real y tomar decisiones que hagan reaccionar a un microcontrolador al instante. A través de este flujo, podemos lograr que un sistema clasifique gestos, reconozca objetos o controle accesos de seguridad, todo mediante la visión de una cámara web.
@@ -17,7 +16,7 @@ Antes de ver los ejemplos prácticos, entendamos las piezas del rompecabezas:
 
 * 🧠 **El Cerebro Digital (Teachable Machine):** Aquí entrenamos el modelo de IA. Mediante *Aprendizaje Supervisado*, le mostramos a la computadora muchas fotos etiquetadas (ej. "Rojo", "Verde") para que encuentre patrones matemáticos y aprenda a diferenciarlos.
 * 🦾 **El Cuerpo Físico (BBC Micro:bit):** Es nuestro microcontrolador. Él no sabe de IA, solo obedece órdenes. Ejecutará acciones físicas (mostrar caras, encender luces o mover motores) basándose en lo que la computadora le diga.
-* 🌐 **El Sistema Nervioso (Lofirobot Bridge):** Es la página web que conecta la cámara de tu PC con la antena de la placa.
+* 🌐 **El Sistema Nervioso (Lofirobot Bridge):** Es la página web que conecta la cámara de tu PC o teléfono con la antena de la placa.
 * 📡 **El Idioma (Bluetooth UART):** El protocolo de comunicación. Lofirobot le "susurra" inalámbricamente mensajes de texto cortos al Micro:bit (ej. "Feliz", "Abrir") para que sepa cómo actuar.
 
 ---
