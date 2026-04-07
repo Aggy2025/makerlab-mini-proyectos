@@ -1,4 +1,5 @@
 # 🤖 05-Microbit_MachineLearning: Conectando la IA al Mundo Físico
+
 MakerLab - Universidad Cenfotec. Este proyecto está diseñado para introducir a los estudiantes en la integración de la **Inteligencia Artificial (Machine Learning)** con el hardware físico. 
 
 El objetivo general es demostrar cómo una computadora puede "aprender a ver" el mundo real y tomar decisiones que hagan reaccionar a un microcontrolador al instante. A través de este flujo, podemos lograr que un sistema clasifique gestos, reconozca objetos o controle accesos de seguridad, todo mediante la visión de una cámara web.
@@ -31,17 +32,23 @@ Este fue nuestro primer acercamiento. El sistema detecta qué estás haciendo co
 * **¿Qué hace el Hardware?** Muestra el icono correspondiente (`IconNames.HAPPY`, `IconNames.SAD` o se duerme `IconNames.ASLEEP`).
 * **Hardware necesario:** Solo la placa Micro:bit.
 
+![Funcionamiento Detector de Emociones](imagenes/demo_emociones.jpg)
+
 ### Ejemplo 2: Contador Visual de Dedos ✌️
 Este experimento demuestra cómo la IA puede cuantificar elementos en pantalla y enviar datos numéricos.
 * **¿Qué hace la IA?** Evalúa la imagen y clasifica si hay "Uno", "Dos" o "Tres" dedos levantados frente a la cámara.
 * **¿Qué hace el Hardware?** Dibuja dinámicamente el número exacto en su matriz de LEDs. Si la cámara está vacía ("Nulo"), limpia la pantalla.
 * **Hardware necesario:** Solo la placa Micro:bit.
 
+![Funcionamiento Contador de Dedos](imagenes/demo_conteo.jpg)
+
 ### Ejemplo 3: Portón de Seguridad Automatizado (Servo) 🚧
 ¡Llevamos la IA al mundo mecánico! Aquí combinamos reconocimiento de colores u objetos con control de actuadores para simular domótica (Smart Home).
-* **¿Qué hace la IA?** Identifica "llaves visuales". En este caso, detecta el color "Verde" para permitir el paso, o el color "Rojo" para bloquearlo (también incluye reconocimiento de objetos específicos como "Minion1" y "Minion2").
+* **¿Qué hace la IA?** Identifica "llaves visuales". En este caso, detecta un carrito de color "Verde" o "Rojo" para permitir el paso, o también incluye reconocimiento de objetos específicos como "Minion1" y "Minion2" para bloquearlo, es decir, solo deja ingresar carros.
 * **¿Qué hace el Hardware?** Envía una señal eléctrica al **Pin P0** para que un Servomotor gire 90 grados (abriendo el portón) o regrese a 0 grados (cerrándolo).
 * **Hardware necesario:** Placa Micro:bit, Servomotor SG90 y Jumpers.
+
+![Funcionamiento Portón Inteligente](imagenes/demo_porton.jpg)
 
 ---
 
@@ -67,15 +74,7 @@ Este experimento demuestra cómo la IA puede cuantificar elementos en pantalla y
 | Negro / Marrón (GND) | Pin **GND** |
 | Amarillo / Naranja (Señal) | Pin **P0** |
 
----
-
-## 🖼️ Galería de Componentes
-
-Para replicar este proyecto, guíate con estas imágenes de referencia:
-
-* Montaje del Micro:bit y Servo: `imagenes/montaje_hardware.jpg`
-* Entrenamiento en Teachable Machine: `imagenes/entrenamiento_ia.jpg`
-* Interfaz Lofirobot Funcionando: `imagenes/interfaz_puente.jpg`
+![Montaje del Micro:bit y Servo](imagenes/montaje_hardware.jpg)
 
 ---
 
@@ -96,6 +95,40 @@ Para facilitar tu aprendizaje, hemos dejado listos los modelos de IA y los códi
 
 ---
 
+## 🏗️ Crea tu propio proyecto (Guía Paso a Paso)
+
+¡No te limites a nuestros ejemplos! Aquí te explicamos cómo construir tu propio sistema inteligente desde cero.
+
+### 1. Entrenar a la IA (El Cerebro)
+1. Ingresa a [Teachable Machine](https://teachablemachine.withgoogle.com/) y selecciona **Proyecto de Imagen** -> **Modelo de imagen estándar**.
+2. Cambia el nombre de las "Clases" (ej. "Perro", "Gato", "Vacio"). **¡Anota estos nombres exactamente como los escribiste, respetando mayúsculas, ya que los usarás en el código!**
+3. Usa el botón de **Webcam** para capturar al menos 50 imágenes por cada clase desde diferentes ángulos.
+4. Haz clic en **Entrenar Modelo** y espera a que termine.
+5. Presiona **Exportar el modelo**, selecciona la pestaña **Subir (Upload)**, sube tu modelo y **copia el enlace (URL)** que se generará.
+
+![Entrenamiento en Teachable Machine](imagenes/pasos_teachable.jpg)
+
+### 2. Programar la Placa (El Cuerpo)
+1. Entra a [MakeCode Micro:bit](https://makecode.microbit.org/) y crea un Nuevo Proyecto.
+2. Ve a las extensiones y busca **Bluetooth**. (Acepta si te dice que eliminará la extensión de Radio).
+3. Haz clic en el engranaje (arriba a la derecha) ⚙️ -> **Configuración del proyecto** y selecciona la opción **"No Pairing Required: Anyone can connect via Bluetooth"**. ¡Esto es vital para que la web lo detecte!
+4. En tu código, agrega el bloque de inicio del servicio Bluetooth UART (`bluetooth.start_uart_service()`) al iniciar.
+5. Usa el evento de recibir datos (`bluetooth.on_uart_data_received`) para leer los mensajes que llegan.
+6. Crea condiciones lógicas (`if/else`). **Si el texto recibido es igual al nombre de tu clase (ej. "Perro")**, dile al Micro:bit qué hacer (mostrar un icono, mover un pin, etc.).
+7. Descarga el código y pásalo a tu Micro:bit por USB.
+
+![Programación en MakeCode](imagenes/pasos_makecode.jpg)
+
+### 3. Conectar y Ejecutar (El Puente)
+1. Con tu Micro:bit encendido, abre [Lofirobot Teachable Microbit](https://cardboard.lofirobot.com/teachable-microbit/).
+2. En la casilla de texto, pega la URL que copiaste en el Paso 1.
+3. Presiona **Connect Micro:bit**. Aparecerá una ventana de tu navegador buscando dispositivos; selecciona tu placa y dale a Emparejar.
+4. ¡Listo! Aléjate un poco y pon a prueba tu modelo frente a la cámara. Deberías ver a tu placa reaccionar en tiempo real.
+
+![Conexión en Lofirobot](imagenes/pasos_lofirobot.jpg)
+
+---
+
 ## 📂 ¿Qué contiene esta carpeta?
 
 Para mantener el orden de nuestro FabLab, los recursos están divididos así:
@@ -103,7 +136,7 @@ Para mantener el orden de nuestro FabLab, los recursos están divididos así:
 * 📄 `README.md`: Este documento con la documentación completa.
 * 📁 `codigos/`: Los archivos de programación de MakeCode (Emociones, Conteo y Servo) listos para la placa.
 * 📁 `modelos/`: Enlaces URL de Teachable Machine con los entrenamientos pre-configurados.
-* 📁 `imagenes/`: Fotografías del montaje y diagramas de conexión.
+* 📁 `imagenes/`: Fotografías del montaje, capturas de pantalla de las herramientas y demostraciones.
 
 ---
 
