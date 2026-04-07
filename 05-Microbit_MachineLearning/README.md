@@ -37,7 +37,7 @@ A continuación, explicamos los tres laboratorios que ya tenemos preparados.
 Este fue nuestro primer acercamiento. El sistema detecta qué estás haciendo con tus manos o tu rostro y el Micro:bit refleja esa "energía" en su pantalla.
 
 * **1. Entrenamiento del Modelo:** Creamos tres clases en Teachable Machine: `Feliz` (sonriendo o pulgar arriba), `Triste` (pulgar abajo) y `Nada` (cámara vacía o rostro neutral). Capturamos unas 100 fotos variadas por clase.
-  ![Entrenamiento Emociones](imagenes/entrenamiento_emociones.jpg)
+  ![Entrenamiento Emociones](imagenes/01_Entrenamiento_modelo.png)
 
 * **2. Programación (MakeCode):** Usamos el bloque `on bluetooth data received`. Añadimos condiciones lógicas: si recibe la palabra "Feliz", la matriz LED muestra `IconNames.HAPPY`; si recibe "Triste", muestra `IconNames.SAD`; si recibe "Nada", limpia la pantalla o muestra `IconNames.ASLEEP`.
   ![Código Emociones](imagenes/codigo_emociones.jpg)
