@@ -20,35 +20,58 @@ Antes de ver los ejemplos prácticos, entendamos las piezas del rompecabezas:
 * 🌐 **El Sistema Nervioso (Lofirobot Bridge):** Es la página web que conecta la cámara de tu PC o teléfono con la antena de la placa.
 * 📡 **El Idioma (Bluetooth UART):** El protocolo de comunicación. Lofirobot le "susurra" inalámbricamente mensajes de texto cortos al Micro:bit (ej. "Feliz", "Abrir") para que sepa cómo actuar.
 
+### 💡 El Secreto de una buena IA: La Calidad de los Datos
+Es vital entender que **el rendimiento del modelo depende 100% de la calidad de las imágenes con las que se entrene**. Un modelo de IA no es "mágico"; si le das datos pobres, tomará decisiones pobres. Para que tu proyecto funcione perfectamente, sigue estas reglas al capturar tus fotos:
+* **Variedad:** Captura el objeto desde diferentes ángulos, distancias y posiciones.
+* **Iluminación:** Asegúrate de que haya buena luz. Las sombras fuertes confunden a la IA.
+* **Fondos distintos:** Si siempre entrenas con la misma pared de fondo, la IA podría creer que la pared es parte del objeto. ¡Mueve la cámara!
+* **Clase "Vacia/Nada":** Siempre crea una clase donde no haya nada frente a la cámara, para que el sistema sepa cuándo debe estar en reposo.
+
 ---
 
 ## 🧪 Nuestros 3 Ejemplos Prácticos
 
-A continuación, explicamos los tres laboratorios que ya tenemos preparados y listos para ejecutar. Cada uno aumenta un poco el nivel de interacción.
+A continuación, explicamos los tres laboratorios que ya tenemos preparados.
 
 ### Ejemplo 1: Detector de Emociones y Gestos 🎭
 Este fue nuestro primer acercamiento. El sistema detecta qué estás haciendo con tus manos o tu rostro y el Micro:bit refleja esa "energía" en su pantalla.
-* **¿Qué hace la IA?** Reconoce tres estados: "Feliz" (o pulgar arriba), "Triste" (o pulgar abajo) y "Nada".
-* **¿Qué hace el Hardware?** Muestra el icono correspondiente (`IconNames.HAPPY`, `IconNames.SAD` o se duerme `IconNames.ASLEEP`).
-* **Hardware necesario:** Solo la placa Micro:bit.
 
-![Funcionamiento Detector de Emociones](imagenes/demo_emociones.jpg)
+* **1. Entrenamiento del Modelo:** Creamos tres clases en Teachable Machine: `Feliz` (sonriendo o pulgar arriba), `Triste` (pulgar abajo) y `Nada` (cámara vacía o rostro neutral). Capturamos unas 100 fotos variadas por clase.
+  ![Entrenamiento Emociones](imagenes/entrenamiento_emociones.jpg)
+
+* **2. Programación (MakeCode):** Usamos el bloque `on bluetooth data received`. Añadimos condiciones lógicas: si recibe la palabra "Feliz", la matriz LED muestra `IconNames.HAPPY`; si recibe "Triste", muestra `IconNames.SAD`; si recibe "Nada", limpia la pantalla o muestra `IconNames.ASLEEP`.
+  ![Código Emociones](imagenes/codigo_emociones.jpg)
+
+* **3. Funcionamiento:** Al ejecutar, la web clasifica el gesto en tiempo real y el Micro:bit cambia su cara al instante, sin necesidad de cables.
+  ![Funcionamiento Emociones](imagenes/demo_emociones.jpg)
+
+---
 
 ### Ejemplo 2: Contador Visual de Dedos ✌️
 Este experimento demuestra cómo la IA puede cuantificar elementos en pantalla y enviar datos numéricos.
-* **¿Qué hace la IA?** Evalúa la imagen y clasifica si hay "Uno", "Dos" o "Tres" dedos levantados frente a la cámara.
-* **¿Qué hace el Hardware?** Dibuja dinámicamente el número exacto en su matriz de LEDs. Si la cámara está vacía ("Nulo"), limpia la pantalla.
-* **Hardware necesario:** Solo la placa Micro:bit.
 
-![Funcionamiento Contador de Dedos](imagenes/demo_conteo.jpg)
+* **1. Entrenamiento del Modelo:** Entrenamos cuatro clases: `Uno`, `Dos`, `Tres` y `Nulo`. Fue crucial mover la mano por toda la pantalla durante la captura para que la IA aprendiera a contar los dedos sin importar en qué parte del cuadro estuvieran.
+  ![Entrenamiento Conteo](imagenes/entrenamiento_conteo.jpg)
+
+* **2. Programación (MakeCode):** Evaluamos el texto recibido. Si es "Uno", dibujamos el número 1 usando el bloque `show number 1`. Repetimos la lógica para los demás números, y apagamos los LEDs si recibe "Nulo".
+  ![Código Conteo](imagenes/codigo_conteo.jpg)
+
+* **3. Funcionamiento:** La placa actúa como un display digital inteligente que se actualiza según la cantidad de dedos que detecta la cámara de tu computadora.
+  ![Funcionamiento Conteo](imagenes/demo_conteo.jpg)
+
+---
 
 ### Ejemplo 3: Portón de Seguridad Automatizado (Servo) 🚧
 ¡Llevamos la IA al mundo mecánico! Aquí combinamos reconocimiento de colores u objetos con control de actuadores para simular domótica (Smart Home).
-* **¿Qué hace la IA?** Identifica "llaves visuales". En este caso, detecta un carrito de color "Verde" o "Rojo" para permitir el paso, o también incluye reconocimiento de objetos específicos como "Minion1" y "Minion2" para bloquearlo, es decir, solo deja ingresar carros.
-* **¿Qué hace el Hardware?** Envía una señal eléctrica al **Pin P0** para que un Servomotor gire 90 grados (abriendo el portón) o regrese a 0 grados (cerrándolo).
-* **Hardware necesario:** Placa Micro:bit, Servomotor SG90 y Jumpers.
 
-![Funcionamiento Portón Inteligente](imagenes/demo_porton.jpg)
+* **1. Entrenamiento del Modelo:** Entrenamos clases como `Verde` (para carros autorizados) y `Rojo` (para no autorizados). También agregamos objetos específicos como `Minion1` y `Minion2` en clases separadas para bloquear su ingreso.
+  ![Entrenamiento Portón](imagenes/entrenamiento_porton.jpg)
+
+* **2. Programación (MakeCode):** Configuramos el control del Servomotor. Si el Bluetooth recibe "Verde", usamos el bloque `servo write pin P0 to 90` para abrir la barrera. Si recibe "Rojo" o "Minion1", escribimos `0` grados para cerrarla.
+  ![Código Portón](imagenes/codigo_porton.jpg)
+
+* **3. Funcionamiento:** Al colocar el carro verde frente a la cámara, la IA lo autoriza, envía la orden y el motor físico levanta la barrera permitiendo el paso.
+  ![Funcionamiento Portón](imagenes/demo_porton.jpg)
 
 ---
 
@@ -83,9 +106,9 @@ Este experimento demuestra cómo la IA puede cuantificar elementos en pantalla y
 Para facilitar tu aprendizaje, hemos dejado listos los modelos de IA y los códigos de programación. Sigue estos pasos:
 
 ### Paso 1: Cargar el código al Micro:bit
-1.  Ve a la carpeta 📁 `codigos/` en este repositorio y descarga el archivo del ejemplo que quieras probar.
-2.  Conecta tu Micro:bit a la computadora por USB. Aparecerá como si fuera una llave maya (USB drive).
-3.  Arrastra el archivo descargado directamente a la unidad del Micro:bit. La placa parpadeará y se reiniciará con el código cargado. *(Alternativamente, puedes importar el código Python suministrado directamente en MakeCode).*
+1.  Ve a la carpeta 📁 `codigos/` en este repositorio y descarga el archivo `.hex` del ejemplo que quieras probar.
+2.  Conecta tu Micro:bit a la computadora por USB. Aparecerá como si fuera una llave maya.
+3.  Arrastra el archivo descargado directamente a la unidad del Micro:bit. La placa parpadeará y se reiniciará con el código cargado.
 
 ### Paso 2: Conectar el Puente y los Modelos
 1.  Abre la carpeta 📁 `modelos/` de este proyecto. Allí encontrarás archivos de texto con los enlaces pre-entrenados para cada uno de los 3 ejemplos. Copia el enlace que deseas usar.
@@ -97,33 +120,32 @@ Para facilitar tu aprendizaje, hemos dejado listos los modelos de IA y los códi
 
 ## 🏗️ Crea tu propio proyecto (Guía Paso a Paso)
 
-¡No te limites a nuestros ejemplos! Aquí te explicamos cómo construir tu propio sistema inteligente desde cero.
+¡No te limites a nuestros ejemplos! Construye tu propio sistema inteligente siguiendo nuestra metodología:
 
 ### 1. Entrenar a la IA (El Cerebro)
 1. Ingresa a [Teachable Machine](https://teachablemachine.withgoogle.com/) y selecciona **Proyecto de Imagen** -> **Modelo de imagen estándar**.
-2. Cambia el nombre de las "Clases" (ej. "Perro", "Gato", "Vacio"). **¡Anota estos nombres exactamente como los escribiste, respetando mayúsculas, ya que los usarás en el código!**
-3. Usa el botón de **Webcam** para capturar al menos 50 imágenes por cada clase desde diferentes ángulos.
-4. Haz clic en **Entrenar Modelo** y espera a que termine.
-5. Presiona **Exportar el modelo**, selecciona la pestaña **Subir (Upload)**, sube tu modelo y **copia el enlace (URL)** que se generará.
+2. Cambia el nombre de las "Clases" (ej. "Perro", "Gato", "Vacio"). **¡Anota estos nombres exactamente como los escribiste (respetando mayúsculas) ya que los usarás en tu código!**
+3. Usa la **Webcam** para capturar unas 100 imágenes variadas por clase (recuerda los consejos de calidad de datos).
+4. Haz clic en **Entrenar Modelo** y pruébalo en la vista previa.
+5. Presiona **Exportar el modelo**, selecciona la pestaña **Subir (Upload)**, sube tu modelo y **copia el enlace (URL)**.
 
 ![Entrenamiento en Teachable Machine](imagenes/pasos_teachable.jpg)
 
 ### 2. Programar la Placa (El Cuerpo)
 1. Entra a [MakeCode Micro:bit](https://makecode.microbit.org/) y crea un Nuevo Proyecto.
-2. Ve a las extensiones y busca **Bluetooth**. (Acepta si te dice que eliminará la extensión de Radio).
-3. Haz clic en el engranaje (arriba a la derecha) ⚙️ -> **Configuración del proyecto** y selecciona la opción **"No Pairing Required: Anyone can connect via Bluetooth"**. ¡Esto es vital para que la web lo detecte!
-4. En tu código, agrega el bloque de inicio del servicio Bluetooth UART (`bluetooth.start_uart_service()`) al iniciar.
-5. Usa el evento de recibir datos (`bluetooth.on_uart_data_received`) para leer los mensajes que llegan.
-6. Crea condiciones lógicas (`if/else`). **Si el texto recibido es igual al nombre de tu clase (ej. "Perro")**, dile al Micro:bit qué hacer (mostrar un icono, mover un pin, etc.).
-7. Descarga el código y pásalo a tu Micro:bit por USB.
+2. Ve a las extensiones y busca **Bluetooth**.
+3. Haz clic en el engranaje ⚙️ -> **Configuración del proyecto** y selecciona **"No Pairing Required: Anyone can connect via Bluetooth"**. ¡Esto es vital para que la web detecte tu placa!
+4. En el bloque `al iniciar`, agrega `bluetooth start uart service`.
+5. Usa el evento `on bluetooth uart data received` (configurado en `until new line`) para leer los mensajes que llegan.
+6. Crea condiciones lógicas (`if/else`). **Si el texto recibido es igual a "Perro"**, pon los bloques que definan qué hará el Micro:bit (ej. mostrar una cara feliz).
+7. Descarga el código y pásalo a tu Micro:bit.
 
 ![Programación en MakeCode](imagenes/pasos_makecode.jpg)
 
 ### 3. Conectar y Ejecutar (El Puente)
-1. Con tu Micro:bit encendido, abre [Lofirobot Teachable Microbit](https://cardboard.lofirobot.com/teachable-microbit/).
-2. En la casilla de texto, pega la URL que copiaste en el Paso 1.
-3. Presiona **Connect Micro:bit**. Aparecerá una ventana de tu navegador buscando dispositivos; selecciona tu placa y dale a Emparejar.
-4. ¡Listo! Aléjate un poco y pon a prueba tu modelo frente a la cámara. Deberías ver a tu placa reaccionar en tiempo real.
+1. Con tu Micro:bit encendido por batería o USB, abre [Lofirobot](https://cardboard.lofirobot.com/teachable-microbit/).
+2. Pega la URL de tu modelo de Teachable Machine.
+3. Presiona **Connect Micro:bit**, selecciona tu placa y ¡listo! Revisa cómo tu hardware obedece a tu propia Inteligencia Artificial.
 
 ![Conexión en Lofirobot](imagenes/pasos_lofirobot.jpg)
 
@@ -131,21 +153,19 @@ Para facilitar tu aprendizaje, hemos dejado listos los modelos de IA y los códi
 
 ## 📂 ¿Qué contiene esta carpeta?
 
-Para mantener el orden de nuestro FabLab, los recursos están divididos así:
-
 * 📄 `README.md`: Este documento con la documentación completa.
 * 📁 `codigos/`: Los archivos de programación de MakeCode (Emociones, Conteo y Servo) listos para la placa.
 * 📁 `modelos/`: Enlaces URL de Teachable Machine con los entrenamientos pre-configurados.
-* 📁 `imagenes/`: Fotografías del montaje, capturas de pantalla de las herramientas y demostraciones.
+* 📁 `imagenes/`: Fotografías del montaje, capturas de pantalla de código y demostraciones.
 
 ---
 
 ## 🔬 Futuras Pruebas y Mejoras (¡Tu turno!)
 
-El MakerLab es un espacio para experimentar. Ahora que entiendes cómo funciona el flujo **Cámara -> IA -> Web -> Bluetooth -> Micro:bit**, te invitamos a intentar lo siguiente usando **únicamente** la pantalla de tu Micro:bit:
+El MakerLab es un espacio para experimentar. Te invitamos a intentar lo siguiente usando **únicamente** la pantalla de tu Micro:bit:
 
-1.  **Monitor de Postura Inteligente 🧘:** ¡Usa la IA para cuidar tu salud! Entrena un modelo que detecte "Espalda Recta" y "Espalda Encorvada". Programa el Micro:bit para que, si te encorvas, parpadee una gran "X" en su pantalla LED, recordándote que debes sentarte bien.
-2.  **Juego de "Piedra, Papel o Tijeras" contra la IA ✌️:** Combina IA con lógica de videojuegos. Entrena a la computadora para reconocer las tres señas. Luego, programa en MakeCode que el Micro:bit elija su propia jugada al azar, la compare con la tuya y muestre una "W" (Ganaste) o "L" (Perdiste).
-3.  **Mascota Virtual (Estilo Tamagotchi) 🐾:** Entrena la cámara para reconocer dibujos en papel (ej. una manzana, una gota de agua, una cama). Cuando le muestres la manzana a la cámara, programa el Micro:bit para que muestre una animación de "masticar" en sus LEDs.
+1.  **Monitor de Postura Inteligente 🧘:** Entrena un modelo que detecte "Espalda Recta" y "Espalda Encorvada". Programa el Micro:bit para que, si te encorvas, parpadee una gran "X" en su pantalla LED, recordándote que debes sentarte bien.
+2.  **Juego de "Piedra, Papel o Tijeras" contra la IA ✌️:** Combina IA con lógica de videojuegos. Entrena a la computadora para reconocer las tres señas. Luego, programa que el Micro:bit elija su propia jugada al azar, la compare con la tuya y muestre una "W" (Ganaste) o "L" (Perdiste).
+3.  **Mascota Virtual (Estilo Tamagotchi) 🐾:** Entrena la cámara para reconocer dibujos en papel (ej. una manzana, una gota de agua). Cuando le muestres la manzana, el Micro:bit mostrará una animación de "masticar" en sus LEDs.
 
 *Si tienes alguna idea increíble o mejoras los códigos, ¡no dudes en crear un Pull Request en este repositorio!*
