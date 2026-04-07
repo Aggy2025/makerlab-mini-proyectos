@@ -40,7 +40,7 @@ Este fue nuestro primer acercamiento. El sistema detecta qué estás haciendo co
   ![Entrenamiento Emociones](imagenes/01_Entrenamiento_modelo.png)
 
 * **2. Programación (MakeCode):** Usamos el bloque `on bluetooth data received`. Añadimos condiciones lógicas: si recibe la palabra "Feliz", la matriz LED muestra `IconNames.HAPPY`; si recibe "Triste", muestra `IconNames.SAD`; si recibe "Nada", limpia la pantalla o muestra `IconNames.ASLEEP`.
-  ![Código Emociones](imagenes/codigo_emociones.jpg)
+  ![Código Emociones](imagenes/01_Programación_Placa.png)
 
 * **3. Funcionamiento:** Al ejecutar, la web clasifica el gesto en tiempo real y el Micro:bit cambia su cara al instante, sin necesidad de cables.
   ![Funcionamiento Emociones](imagenes/demo_emociones.jpg)
