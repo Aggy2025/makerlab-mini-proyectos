@@ -107,7 +107,7 @@ Este experimento demuestra cómo la IA puede cuantificar elementos en pantalla y
 Para facilitar tu aprendizaje, hemos dejado listos los modelos de IA y los códigos de programación. Sigue estos pasos:
 
 ### Paso 1: Cargar el código al Micro:bit
-1.  Ve a la carpeta 📁 `codigos/` en este repositorio y descarga el archivo `.hex` del ejemplo que quieras probar.
+1.  Ve a la carpeta 📁 [codigos](https://github.com/Aggy2025/makerlab-mini-proyectos/tree/main/05-Microbit_MachineLearning/codigos) en este repositorio y descarga el archivo `.hex` del ejemplo que quieras probar.
 2.  Conecta tu Micro:bit a la computadora por USB. Aparecerá como si fuera una llave maya.
 3.  Arrastra el archivo descargado directamente a la unidad del Micro:bit. La placa parpadeará y se reiniciará con el código cargado.
 
