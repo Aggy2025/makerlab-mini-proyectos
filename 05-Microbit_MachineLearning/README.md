@@ -115,7 +115,8 @@ Para facilitar tu aprendizaje, hemos dejado listos los modelos de IA y los códi
 1.  Abre la carpeta 📁 `modelos/` de este proyecto. Allí encontrarás archivos de texto con los enlaces pre-entrenados para cada uno de los 3 ejemplos. Copia el enlace que deseas usar.
 2.  Entra a la herramienta web: 🔗 [Lofirobot Teachable Microbit](https://cardboard.lofirobot.com/teachable-microbit/).
 3.  Pega el enlace de tu modelo en la casilla de la página web.
-4.  Presiona **Connect Micro:bit**, selecciona tu placa en la lista de Bluetooth (recuerda tener activa la configuración de "No Pairing Required" en MakeCode) y ¡listo! Pon a prueba la inteligencia del sistema frente a la cámara.
+   [Modelo](imagenes/Lofitobot_Techable_Machine_Microbit.png)  [Conectar](imagenes/Conectar_microbit.png)
+5.  Presiona **Connect Micro:bit**, selecciona tu placa en la lista de Bluetooth (recuerda tener activa la configuración de "No Pairing Required" en MakeCode) y ¡listo! Pon a prueba la inteligencia del sistema frente a la cámara.
 
 ---
 
