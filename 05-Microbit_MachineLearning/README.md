@@ -55,7 +55,7 @@ Este experimento demuestra cómo la IA puede cuantificar elementos en pantalla y
   ![Entrenamiento Conteo](imagenes/02_Entrenamiento_modelo.png)
 
 * **2. Programación (MakeCode):** Evaluamos el texto recibido. Si es "Uno", dibujamos el número 1 usando el bloque `show number 1`. Repetimos la lógica para los demás números, y apagamos los LEDs si recibe "Nulo".
-  ![Código Conteo](imagenes/02_Entrenamiento_modelo.png
+  ![Código Conteo](imagenes/02_Programación_Placa.png)
 
 * **3. Funcionamiento:** La placa actúa como un display digital inteligente que se actualiza según la cantidad de dedos que detecta la cámara de tu computadora.
   ![Funcionamiento Conteo](imagenes/demo_conteo.jpg)
@@ -69,7 +69,7 @@ Este experimento demuestra cómo la IA puede cuantificar elementos en pantalla y
   ![Entrenamiento Portón](imagenes/03_Entrenamiento_modelo.png)
 
 * **2. Programación (MakeCode):** Configuramos el control del Servomotor. Si el Bluetooth recibe "Verde", usamos el bloque `servo write pin P0 to 90` para abrir la barrera. Si recibe "Rojo" o "Minion1", escribimos `0` grados para cerrarla.
-  ![Código Portón](imagenes/03_Entrenamiento_modelo.png)
+  ![Código Portón](imagenes/03_Programación_Placa.png)
 
 * **3. Funcionamiento:** Al colocar el carro verde frente a la cámara, la IA lo autoriza, envía la orden y el motor físico levanta la barrera permitiendo el paso.
   ![Funcionamiento Portón](imagenes/demo_porton.jpg)
