@@ -112,7 +112,7 @@ Para facilitar tu aprendizaje, hemos dejado listos los modelos de IA y los códi
 3.  Arrastra el archivo descargado directamente a la unidad del Micro:bit. La placa parpadeará y se reiniciará con el código cargado.
 
 ### Paso 2: Conectar el Puente y los Modelos
-1.  Abre la carpeta 📁 `modelos/` de este proyecto. Allí encontrarás archivos de texto con los enlaces pre-entrenados para cada uno de los 3 ejemplos. Copia el enlace que deseas usar.
+1.  Abre la carpeta 📁 [modelos](https://github.com/Aggy2025/makerlab-mini-proyectos/blob/main/05-Microbit_MachineLearning/modelos/modelos.md) de este proyecto. Allí encontrarás archivos de texto con los enlaces pre-entrenados para cada uno de los 3 ejemplos. Copia el enlace que deseas usar.
 2.  Entra a la herramienta web: 🔗 [Lofirobot Teachable Microbit](https://cardboard.lofirobot.com/teachable-microbit/).
 3.  Pega el enlace de tu modelo en la casilla de la página web.
 4.  
