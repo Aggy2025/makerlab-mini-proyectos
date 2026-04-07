@@ -52,10 +52,10 @@ Este fue nuestro primer acercamiento. El sistema detecta qué estás haciendo co
 Este experimento demuestra cómo la IA puede cuantificar elementos en pantalla y enviar datos numéricos.
 
 * **1. Entrenamiento del Modelo:** Entrenamos cuatro clases: `Uno`, `Dos`, `Tres` y `Nulo`. Fue crucial mover la mano por toda la pantalla durante la captura para que la IA aprendiera a contar los dedos sin importar en qué parte del cuadro estuvieran.
-  ![Entrenamiento Conteo](imagenes/entrenamiento_conteo.jpg)
+  ![Entrenamiento Conteo](imagenes/02_Entrenamiento_modelo.png)
 
 * **2. Programación (MakeCode):** Evaluamos el texto recibido. Si es "Uno", dibujamos el número 1 usando el bloque `show number 1`. Repetimos la lógica para los demás números, y apagamos los LEDs si recibe "Nulo".
-  ![Código Conteo](imagenes/codigo_conteo.jpg)
+  ![Código Conteo](imagenes/02_Entrenamiento_modelo.png
 
 * **3. Funcionamiento:** La placa actúa como un display digital inteligente que se actualiza según la cantidad de dedos que detecta la cámara de tu computadora.
   ![Funcionamiento Conteo](imagenes/demo_conteo.jpg)
@@ -66,10 +66,10 @@ Este experimento demuestra cómo la IA puede cuantificar elementos en pantalla y
 ¡Llevamos la IA al mundo mecánico! Aquí combinamos reconocimiento de colores u objetos con control de actuadores para simular domótica (Smart Home).
 
 * **1. Entrenamiento del Modelo:** Entrenamos clases como `Verde` (para carros autorizados) y `Rojo` (para no autorizados). También agregamos objetos específicos como `Minion1` y `Minion2` en clases separadas para bloquear su ingreso.
-  ![Entrenamiento Portón](imagenes/entrenamiento_porton.jpg)
+  ![Entrenamiento Portón](imagenes/03_Entrenamiento_modelo.png)
 
 * **2. Programación (MakeCode):** Configuramos el control del Servomotor. Si el Bluetooth recibe "Verde", usamos el bloque `servo write pin P0 to 90` para abrir la barrera. Si recibe "Rojo" o "Minion1", escribimos `0` grados para cerrarla.
-  ![Código Portón](imagenes/codigo_porton.jpg)
+  ![Código Portón](imagenes/03_Entrenamiento_modelo.png)
 
 * **3. Funcionamiento:** Al colocar el carro verde frente a la cámara, la IA lo autoriza, envía la orden y el motor físico levanta la barrera permitiendo el paso.
   ![Funcionamiento Portón](imagenes/demo_porton.jpg)
