@@ -44,6 +44,7 @@ Este fue nuestro primer acercamiento. El sistema detecta qué estás haciendo co
 
 * **3. Funcionamiento:** Al ejecutar, la web clasifica el gesto en tiempo real y el Micro:bit cambia su cara al instante, sin necesidad de cables.
   ![Funcionamiento Emociones](imagenes/demo_emociones.jpg)
+  ![Conexión en Lofirobot](imagenes/pasos_lofirobot.jpg)
 
 ---
 
@@ -58,7 +59,7 @@ Este experimento demuestra cómo la IA puede cuantificar elementos en pantalla y
 
 * **3. Funcionamiento:** La placa actúa como un display digital inteligente que se actualiza según la cantidad de dedos que detecta la cámara de tu computadora.
   ![Funcionamiento Conteo](imagenes/demo_conteo.jpg)
-
+![Conexión en Lofirobot](imagenes/pasos_lofirobot.jpg)
 ---
 
 ### Ejemplo 3: Portón de Seguridad Automatizado (Servo) 🚧
@@ -72,7 +73,7 @@ Este experimento demuestra cómo la IA puede cuantificar elementos en pantalla y
 
 * **3. Funcionamiento:** Al colocar el carro verde frente a la cámara, la IA lo autoriza, envía la orden y el motor físico levanta la barrera permitiendo el paso.
   ![Funcionamiento Portón](imagenes/demo_porton.jpg)
-
+![Conexión en Lofirobot](imagenes/pasos_lofirobot.jpg)
 ---
 
 ## 🛠️ Materiales Necesarios
@@ -129,7 +130,6 @@ Para facilitar tu aprendizaje, hemos dejado listos los modelos de IA y los códi
 4. Haz clic en **Entrenar Modelo** y pruébalo en la vista previa.
 5. Presiona **Exportar el modelo**, selecciona la pestaña **Subir (Upload)**, sube tu modelo y **copia el enlace (URL)**.
 
-![Entrenamiento en Teachable Machine](imagenes/pasos_teachable.jpg)
 
 ### 2. Programar la Placa (El Cuerpo)
 1. Entra a [MakeCode Micro:bit](https://makecode.microbit.org/) y crea un Nuevo Proyecto.
@@ -140,14 +140,11 @@ Para facilitar tu aprendizaje, hemos dejado listos los modelos de IA y los códi
 6. Crea condiciones lógicas (`if/else`). **Si el texto recibido es igual a "Perro"**, pon los bloques que definan qué hará el Micro:bit (ej. mostrar una cara feliz).
 7. Descarga el código y pásalo a tu Micro:bit.
 
-![Programación en MakeCode](imagenes/pasos_makecode.jpg)
 
 ### 3. Conectar y Ejecutar (El Puente)
 1. Con tu Micro:bit encendido por batería o USB, abre [Lofirobot](https://cardboard.lofirobot.com/teachable-microbit/).
 2. Pega la URL de tu modelo de Teachable Machine.
 3. Presiona **Connect Micro:bit**, selecciona tu placa y ¡listo! Revisa cómo tu hardware obedece a tu propia Inteligencia Artificial.
-
-![Conexión en Lofirobot](imagenes/pasos_lofirobot.jpg)
 
 ---
 
