@@ -25,7 +25,7 @@ Actualmente, el repositorio cuenta con los siguientes proyectos funcionales. Nav
 | **[3. Cenfobot: Control Remoto BLE con Autocorrección](./03-Sumo_Web)** | Sumobot (ESP32), Giroscopio, Control PDI, Web BLE | **Robótica y Control Automático:** Telemetría en tiempo real y corrección matemática de trayectoria. |
 | **[4. Radar Ultrasónico Interactivo](./04-Radar_Ultrasonico)** | Arduino, Sensor HC-SR04, Servo SG90, Processing | **Percepción Robótica:** Sensores de distancia y renderizado de interfaces gráficas 2D. |
 | **[5. Micro:bit Machine Learning](./05-Microbit_MachineLearning)** | Teachable Machine, MakeCode, Micro:bit, BLE | **Inteligencia Artificial:** Visión computacional conectada a la toma de decisiones físicas. |
-| **[6. Arcade LCD Minigames](./06-Arduino-LCD-Minigames)** | Arduino C++, LCD 1602 Keypad Shield | **Programación de Videojuegos:** Lógica pura, física 2D, uso de memoria y superación de límites de hardware retro. |
+| **[6. Arduino-LCD-Minigames](./06-Arduino-LCD-Minigames)** | Arduino C++, LCD 1602 Keypad Shield | **Programación de Videojuegos:** Lógica pura, física 2D, uso de memoria y superación de límites de hardware retro. |
 
 ---
 
