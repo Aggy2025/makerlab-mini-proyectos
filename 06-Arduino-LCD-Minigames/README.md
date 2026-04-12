@@ -99,7 +99,7 @@ void loop() {
 
 Dentro de la carpeta `codigos/` encontrarás 4 juegos listos para usar. Solo puedes cargar un juego a la vez en el Arduino. Haz clic en el nombre del juego que desees para ver su código fuente y súbelo a la placa.
 
-### 1. 🟢 [Simon Dice](./codigos/01-Simon_Dice.ino)
+### 1. 🟢 [Simon Dice](./codigos/01_Simon_Dice.ino)
 **El clásico juego de memoria.** El Arduino generará una secuencia aleatoria de botones (Arriba, Abajo, Izquierda, Derecha). Debes observarla y repetirla exactamente en el mismo orden. Cada nivel suma un paso extra a la secuencia.
 
 * **Qué aprenderás:** Uso de arreglos temporales (`arrays`) para guardar el historial del jugador, generación de semillas aleatorias (`randomSeed`) y programación de "pausas estratégicas" para adaptar la velocidad de la máquina a los reflejos humanos.
