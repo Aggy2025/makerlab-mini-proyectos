@@ -35,7 +35,7 @@ Aunque el objetivo es divertirse, detrás de cada juego hay conceptos geniales d
 Para que reconozcas fácilmente los componentes antes de armar la consola:
 
 * **Arduino UNO y LCD Keypad Shield :** El cerebro del proyecto.
-  *(Añade aquí tu foto: `![Arduino UNO](imagenes/arduino_uno_lcd_shield.jpeg)`)*
+  ![Arduino UNO](imagenes/arduino_uno_lcd_shield.jpeg)`)
 
 ---
 
@@ -48,7 +48,7 @@ Armar tu consola toma menos de 10 segundos:
 3. Conecta el cable USB del Arduino a tu computadora.
 4. *Tip Maker:* Si ves la pantalla encendida pero no logras leer nada, busca un cuadrito azul en la esquina superior izquierda de la placa. Usa un destornillador pequeño para girarlo suavemente; esto ajustará el contraste de la pantalla.
 
-*(Añade aquí tu foto de la consola lista: `![Consola Ensamblada](imagenes/consola_ensamblada.jpeg)`)*
+![Consola Ensamblada](imagenes/consola_ensamblada.jpeg))*
 
 ---
 
