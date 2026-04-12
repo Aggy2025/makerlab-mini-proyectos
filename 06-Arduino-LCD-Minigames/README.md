@@ -34,10 +34,8 @@ Aunque el objetivo es divertirse, detrás de cada juego hay conceptos geniales d
 
 Para que reconozcas fácilmente los componentes antes de armar la consola:
 
-* **Arduino UNO:** El cerebro del proyecto.
-  *(Añade aquí tu foto: `![Arduino UNO](imagenes/arduino_uno.jpg)`)*
-* **LCD Keypad Shield:** La pantalla con botones.
-  *(Añade aquí tu foto: `![LCD Shield](imagenes/lcd_shield.jpg)`)*
+* **Arduino UNO y LCD Keypad Shield :** El cerebro del proyecto.
+  *(Añade aquí tu foto: `![Arduino UNO](imagenes/arduino_uno_lcd_shield.jpg)`)*
 
 ---
 
