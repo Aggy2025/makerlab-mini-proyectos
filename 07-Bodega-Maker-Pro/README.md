@@ -114,4 +114,4 @@ Cuando presionas un botón físico, los metales por dentro chocan y rebotan a ni
 **3. El límite de espera del Radar**
 El sensor ultrasónico funciona gritando un sonido y esperando a que rebote para medir el tiempo. Pero, ¿qué pasa si el sonido no choca contra nada y se pierde en el aire? ¡El Arduino se quedaría esperando para siempre! Para evitarlo, le pusimos un cronómetro límite: "Si en 20 milisegundos no escuchas el rebote, asume que no hay nada ahí y sigue trabajando".
 
-💻 **[>> CLIC AQUÍ PARA VER Y DESCARGAR EL CÓDIGO (.ino) <<](enlace_a_tu_archivo.ino)**
+💻 **[>> CLIC AQUÍ PARA VER Y DESCARGAR EL CÓDIGO (.ino) <<](codigos/bodega_Maker.ino)**
