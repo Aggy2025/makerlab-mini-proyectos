@@ -44,8 +44,7 @@ Este fue nuestro primer acercamiento. El sistema detecta qué estás haciendo co
 
 * **3. Funcionamiento:** Al ejecutar, la web clasifica el gesto en tiempo real y el Micro:bit cambia su cara al instante, sin necesidad de cables.
   ![Funcionamiento Emociones](imagenes/demo_emociones.jpg)
-  ![Conexión en Lofirobot](imagenes/pasos_lofirobot.jpg)
-
+ 
 ---
 
 ### Ejemplo 2: Contador Visual de Dedos ✌️
@@ -59,7 +58,7 @@ Este experimento demuestra cómo la IA puede cuantificar elementos en pantalla y
 
 * **3. Funcionamiento:** La placa actúa como un display digital inteligente que se actualiza según la cantidad de dedos que detecta la cámara de tu computadora.
   ![Funcionamiento Conteo](imagenes/demo_conteo.jpg)
-![Conexión en Lofirobot](imagenes/pasos_lofirobot.jpg)
+
 ---
 
 ### Ejemplo 3: Portón de Seguridad Automatizado (Servo) 🚧
@@ -73,7 +72,7 @@ Este experimento demuestra cómo la IA puede cuantificar elementos en pantalla y
 
 * **3. Funcionamiento:** Al colocar el carro verde frente a la cámara, la IA lo autoriza, envía la orden y el motor físico levanta la barrera permitiendo el paso.
   ![Funcionamiento Portón](imagenes/demo_porton.jpg)
-![Conexión en Lofirobot](imagenes/pasos_lofirobot.jpg)
+
 ---
 
 ## 🛠️ Materiales Necesarios
