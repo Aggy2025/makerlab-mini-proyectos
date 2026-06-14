@@ -61,7 +61,7 @@ def calibrar_drift(sensor, segundos=4):
 
         data = sensor.gyro[2]
 
-        if abs(data) < 0.05:
+        if abs(data) < 0.008:
 
             suma += data
             muestras += 1
@@ -163,7 +163,7 @@ def avanzar_recto(velocidad, duracion):
 
     t0 = time.monotonic()
 
-    base = abs(velocidad)
+    velocidad_base = abs(velocidad)
     direccion = 1 if velocidad > 0 else -1
 
     Kp = 0.15
@@ -172,6 +172,9 @@ def avanzar_recto(velocidad, duracion):
 
     error_anterior = 0
     error_integral = 0
+    max_correccion = 0.3
+
+    t_anterior = time.monotonic()
 
     if velocidad > 0:
         led((0,255,0))
@@ -183,7 +186,6 @@ def avanzar_recto(velocidad, duracion):
         if stop_flag:
             break
 
-        # STOP inmediato desde BLE
         if ble.connected and uart.in_waiting:
 
             raw = uart.readline()
@@ -203,19 +205,29 @@ def avanzar_recto(velocidad, duracion):
                 except:
                     pass
 
+        t_actual = time.monotonic()
+        dt = 1
+        t_anterior = t_actual
+
         error = sensor.gyro[2] - drift
 
-        error_integral += error
+        error_integral += error * dt
 
-        error_deriv = error - error_anterior
+        error_derivativo = (error - error_anterior) / dt
 
-        correccion = Kp*error + Ki*error_integral + Kd*error_deriv
+        correccion = (
+            Kp * error
+            + Ki * error_integral
+            + Kd * error_derivativo
+        )
 
-        correccion = max(-0.3, min(0.3, correccion))
+        correccion = max(
+            -max_correccion,
+            min(max_correccion, correccion)
+        )
 
-        # PDI ORIGINAL (funciona adelante y atrás)
-        v1 = base * direccion + correccion
-        v2 = base * direccion - correccion
+        v1 = velocidad_base * direccion + correccion
+        v2 = velocidad_base * direccion - correccion
 
         v1 = max(-1, min(1, v1))
         v2 = max(-1, min(1, v2))
@@ -229,7 +241,6 @@ def avanzar_recto(velocidad, duracion):
 
     ib.motor_1.throttle = 0
     ib.motor_2.throttle = 0
-
 
 # =========================================================
 # MOVIMIENTOS
@@ -246,7 +257,7 @@ def backward(vel=0.5):
 
     print("BACKWARD")
 
-    avanzar_recto(-vel,5)
+    avanzar_recto(-vel,3)
 
 
 def left(vel=0.35):
