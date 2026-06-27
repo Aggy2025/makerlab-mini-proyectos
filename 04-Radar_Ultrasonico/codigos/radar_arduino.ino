@@ -1,115 +1,132 @@
-#include <Servo.h> // Librería para controlar el "cuello" del radar
+#include <Servo.h>
 
-#define trigPin 8  // Pin que emite el sonido
-#define echoPin 9  // Pin que escucha el rebote
-#define ledPin 7   // Pin del LED de alerta física
+#define trigPin 8
+#define echoPin 9
+#define ledPin 7
 
-Servo myservo;     // Creamos el objeto servo
+Servo myservo;
 
 long duration;
 int distance;
 
-int servoPos = 15; // Ángulo inicial del servo
-int direccion = 1; // 1 = avanza, -1 = retrocede
+int servoPos = 15;
+int direccion = 1;
 
 bool tracking = false;
 bool radarActivo = true;
 
-// ---------- SENSOR (Los Ojos) ----------
+// Contador para confirmar que el objeto desapareció
+int perdidas = 0;
+
+// ---------- SENSOR ----------
 int calculateDistance()
 {
-  // Limpiamos el pin por 2 microsegundos
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);
 
-  // Disparamos un pulso ultrasónico inaudible por 10 microsegundos
   digitalWrite(trigPin, HIGH);
   delayMicroseconds(10);
   digitalWrite(trigPin, LOW);
 
-  // Medimos cuánto tardó en volver el eco
-  duration = pulseIn(echoPin, HIGH, 30000);
+  // Timeout reducido
+  duration = pulseIn(echoPin, HIGH, 20000);
 
-  if(duration == 0) return -1; // Si no hay rebote, ignoramos
+  if (duration == 0)
+    return -1;
 
-  // Fórmula mágica: tiempo * velocidad del sonido / 2 (ida y vuelta)
   return duration * 0.034 / 2;
 }
 
 // ---------- COMANDOS ----------
 void leerComando()
 {
-  // Si la computadora (Processing) nos manda un mensaje...
   if (Serial.available())
   {
     String cmd = Serial.readStringUntil('\n');
     cmd.trim();
 
-    // Podemos detener o arrancar el radar a distancia
-    if(cmd == "STOP") radarActivo = false;
-    if(cmd == "START") radarActivo = true;
+    if (cmd == "STOP")
+      radarActivo = false;
+
+    if (cmd == "START")
+      radarActivo = true;
   }
 }
 
-// ---------- SCAN (Barrido Normal) ----------
+// ---------- ESCANEO NORMAL ----------
 void scanRadar()
 {
-  myservo.write(servoPos); // Movemos el motor al ángulo actual
+  myservo.write(servoPos);
 
-  int d = calculateDistance(); // Medimos qué hay al frente
-  distance = d;
+  delay(25);
 
-  // ⭐ FORMATO OBLIGATORIO PARA PROCESSING (El Puente)
-  // Mandamos los datos así: "angulo,distancia."
+  distance = calculateDistance();
+
   Serial.print(servoPos);
   Serial.print(",");
   Serial.print(distance);
   Serial.print(".");
 
-  // Si hay un objeto a menos de 10cm, ¡Alerta!
-  if(d > 0 && d < 10)
+  // Si detecta algo cerca entra en seguimiento
+  if (distance > 0 && distance <= 10)
   {
-    tracking = true; // Entramos en modo persecución
-    digitalWrite(ledPin, HIGH); // Encendemos LED
+    tracking = true;
+    perdidas = 0;
+    digitalWrite(ledPin, HIGH);
     return;
   }
 
-  // Movemos el radar un paso
   servoPos += direccion;
 
-  // Si llegamos a los extremos, cambiamos de dirección (efecto parabrisas)
-  if(servoPos >= 165 || servoPos <= 15)
+  if (servoPos >= 165 || servoPos <= 15)
     direccion *= -1;
 
-  delay(20); // Pequeña pausa para que el motor llegue a su posición
+  delay(20);
 }
 
-// ---------- TRACKING (Persecución de objeto) ----------
+// ---------- SEGUIMIENTO ----------
 void trackObject()
 {
-  digitalWrite(ledPin, HIGH); // LED rojo encendido
+  digitalWrite(ledPin, HIGH);
 
-  // Hacemos un micro-barrido solo en la zona donde detectamos algo
-  for(int offset=-8; offset<=8; offset++)
+  for (int offset = -8; offset <= 8; offset++)
   {
     leerComando();
-    if(!radarActivo) return;
 
-    myservo.write(servoPos + offset);
+    if (!radarActivo)
+      return;
 
-    int d = calculateDistance();
-    distance = d;
+    int pos = servoPos + offset;
 
-    // ⭐ SIEMPRE enviar datos al radar (Processing necesita saber)
-    Serial.print(servoPos + offset);
+    pos = constrain(pos, 15, 165);
+
+    myservo.write(pos);
+
+    delay(40);
+
+    distance = calculateDistance();
+
+    Serial.print(pos);
     Serial.print(",");
     Serial.print(distance);
     Serial.print(".");
 
-    // Si el objeto se aleja a más de 10cm, volvemos a barrido normal
-    if(!(d > 0 && d < 10))
+    // Si todavía existe el objeto
+    if (distance > 0 && distance <= 10)
+    {
+      perdidas = 0;
+      servoPos = pos;
+    }
+    else
+    {
+      perdidas++;
+    }
+
+    // Debe perder el objeto varias veces seguidas
+    if (perdidas >= 5)
     {
       tracking = false;
+      perdidas = 0;
       digitalWrite(ledPin, LOW);
       return;
     }
@@ -118,27 +135,28 @@ void trackObject()
   }
 }
 
-// ---------- SETUP (Configuración inicial) ----------
+// ---------- SETUP ----------
 void setup()
 {
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
   pinMode(ledPin, OUTPUT);
 
-  myservo.attach(11); // Conectamos el servo al pin 11
+  myservo.attach(11);
+  myservo.write(servoPos);
 
-  Serial.begin(9600); // Abrimos el canal de comunicación USB a 9600 baudios
+  Serial.begin(9600);
 }
 
-// ---------- LOOP (Ciclo infinito) ----------
+// ---------- LOOP ----------
 void loop()
 {
   leerComando();
 
-  if(!radarActivo) return; // Si nos mandaron a parar, no hacemos nada
+  if (!radarActivo)
+    return;
 
-  // Decidimos qué hacer: perseguir o buscar
-  if(tracking)
+  if (tracking)
     trackObject();
   else
     scanRadar();
